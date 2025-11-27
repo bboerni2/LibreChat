@@ -108,7 +108,9 @@ services:
       APP_TITLE: ${APP_TITLE}
       HELP_AND_FAQ_URL: ${HELP_AND_FAQ_URL}
       OPENWEATHER_API_KEY: ${OPENWEATHER_API_KEY}
-
+      
+    volumes:
+      - ./librechat.yaml:/app/librechat.yaml
 
 # ---------------------------------------------------
 
