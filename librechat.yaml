@@ -1,18 +1,18 @@
 endpoints:
   azureOpenAI:
     titleConvo: true
-    titleModel: "gpt-5.1"
+    titleModel: "gpt-4.1"
     summarize: true
-    summaryModel: "gpt-5.1"
+    summaryModel: "gpt-4.1"
 
     groups:
-      - group: "azure-gpt51"
+      - group: "azure-gpt41"
         apiKey: "${AZURE_OPENAI_API_KEY}"
         instanceName: "${AZURE_OPENAI_INSTANCE}"
         apiVersion: "${AZURE_OPENAI_API_VERSION}"
 
         models:
-          gpt-5.1:
-            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT51}"
+          gpt-4.1:
+            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT41}"
             default: true
-            label: "GPT-5.1 (Azure)"
+            label: "GPT-4.1 (Azure balchat)"
