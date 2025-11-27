@@ -1,13 +1,17 @@
 endpoints:
   azureOpenAI:
     titleConvo: true
-    titleModel: "gpt-5.1-chat"
+    titleModel: "gpt-5.1"
     summarize: true
-    summaryModel: "gpt-5.1-chat"
+    summaryModel: "gpt-5.1"
+
     groups:
       - group: "azure-foundry-gpt51"
         apiKey: "${AZURE_FOUNDRY_API_KEY}"
         baseURL: "${AZURE_FOUNDRY_BASEURL}"
         serverless: true
+
         models:
-          gpt-5.1-chat: true
+          gpt-5.1:
+            default: true
+            label: "GPT-5.1 (Azure Foundry)"
