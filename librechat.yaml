@@ -1,0 +1,24 @@
+endpoints:
+  azureOpenAI:
+    titleConvo: true
+    titleModel: "gpt-4o-mini"
+    summarize: true
+    summaryModel: "gpt-4o-mini"
+
+    plugins: false
+    assistants: false
+
+    groups:
+      - group: "azure-main"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+
+        models:
+          gpt-4o:
+            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT4O}"
+            version: "${AZURE_OPENAI_API_VERSION}"
+            default: true
+
+          gpt-4o-mini:
+            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT4O_MINI}"
+            version: "${AZURE_OPENAI_API_VERSION}"
