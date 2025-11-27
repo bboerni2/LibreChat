@@ -1,24 +1,13 @@
 endpoints:
   azureOpenAI:
     titleConvo: true
-    titleModel: "gpt-4o-mini"
+    titleModel: "gpt-5.1-chat"
     summarize: true
-    summaryModel: "gpt-4o-mini"
-
-    plugins: false
-    assistants: false
-
+    summaryModel: "gpt-5.1-chat"
     groups:
-      - group: "azure-main"
-        apiKey: "${AZURE_OPENAI_API_KEY}"
-        instanceName: "${AZURE_OPENAI_INSTANCE}"
-
+      - group: "azure-foundry-gpt51"
+        apiKey: "${AZURE_FOUNDRY_API_KEY}"
+        baseURL: "${AZURE_FOUNDRY_BASEURL}"
+        serverless: true
         models:
-          gpt-4o:
-            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT4O}"
-            version: "${AZURE_OPENAI_API_VERSION}"
-            default: true
-
-          gpt-4o-mini:
-            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT4O_MINI}"
-            version: "${AZURE_OPENAI_API_VERSION}"
+          gpt-5.1-chat: true
