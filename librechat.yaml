@@ -1,18 +1,18 @@
 endpoints:
   azureOpenAI:
-    titleConvo: true
     titleModel: "gpt-4.1"
+    plugins: true
+    assistants: true
     summarize: true
     summaryModel: "gpt-4.1"
+    titleConvo: true
+    titleMethod: "completion"
 
     groups:
-      - group: "azure-gpt41"
+      - group: "balchat"
         apiKey: "${AZURE_OPENAI_API_KEY}"
-        instanceName: "${AZURE_OPENAI_INSTANCE}"
-        apiVersion: "${AZURE_OPENAI_API_VERSION}"
-
+        instanceName: "${AZURE_OPENAI_INSTANCE}" 
+        version: "${AZURE_OPENAI_API_VERSION}" 
         models:
           gpt-4.1:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT41}"
-            default: true
-            label: "GPT-4.1 (Azure balchat)"
