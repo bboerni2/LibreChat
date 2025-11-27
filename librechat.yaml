@@ -6,12 +6,13 @@ endpoints:
     summaryModel: "gpt-5.1"
 
     groups:
-      - group: "azure-foundry-gpt51"
-        apiKey: "${AZURE_FOUNDRY_API_KEY}"
-        baseURL: "${AZURE_FOUNDRY_BASEURL}"
-        serverless: true
+      - group: "azure-gpt51"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        apiVersion: "${AZURE_OPENAI_API_VERSION}"
 
         models:
           gpt-5.1:
+            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT51}"
             default: true
-            label: "GPT-5.1 (Azure Foundry)"
+            label: "GPT-5.1 (Azure)"
