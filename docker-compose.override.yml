@@ -55,6 +55,8 @@ services:
       ENTRA_ID_INCLUDE_OWNERS_AS_MEMBERS: ${ENTRA_ID_INCLUDE_OWNERS_AS_MEMBERS}
       OPENID_GRAPH_SCOPES: ${OPENID_GRAPH_SCOPES}
 
+    volumes:
+      - ./librechat.yaml:/app/librechat.yaml
 
 
 # ---------------------------------------------------
