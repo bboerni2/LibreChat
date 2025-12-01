@@ -3,10 +3,9 @@ cache: true
 
 endpoints:
 
-  ##############################################
-  # 1) Klassische Azure OpenAI Ressource
-  #    (balchat → germanywestcentral)
-  ##############################################
+  ########################################################
+  # 1) Azure OpenAI (balchat) – GPT-4.1
+  ########################################################
   azureOpenAI:
     titleModel: "gpt-4.1"
     plugins: true
@@ -20,21 +19,21 @@ endpoints:
         apiKey: "${AZURE_OPENAI_API_KEY}"
         instanceName: "${AZURE_OPENAI_INSTANCE}"
         version: "${AZURE_OPENAI_API_VERSION}"
+
         models:
           gpt-4.1:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT41}"
 
 
-  ##############################################
-  # 2) Azure AI Foundry Serverless Endpoint
-  #    (GPT-5 aus swedencentral)
-  #    → wichtig: serverless + baseURL
-  ##############################################
+  ########################################################
+  # 2) Azure AI Foundry (GPT-5, serverless)
+  #    → custom MUST BE AN ARRAY []
+  ########################################################
   custom:
-    groups:
-      - group: "foundry-gpt5"
-        apiKey: "${AZURE_FOUNDRY_API_KEY_GPT5}"
-        baseURL: "${AZURE_FOUNDRY_BASEURL_GPT5}"
-        serverless: true
-        models:
-          gpt-5: true
+    - group: "foundry-gpt5"
+      apiKey: "${AZURE_FOUNDRY_API_KEY_GPT5}"
+      baseURL: "${AZURE_FOUNDRY_BASEURL_GPT5}"
+      serverless: true
+
+      models:
+        gpt-5: true
