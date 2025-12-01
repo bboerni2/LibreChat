@@ -18,6 +18,7 @@ services:
   api:
     environment:
       # Nur das, was du wirklich aus Portainer steuern willst
+      DEBUG_CONSOLE: ${DEBUG_CONSOLE}
 
       # Basis-URLs (falls du die flexibel halten möchtest)
       DOMAIN_CLIENT: ${DOMAIN_CLIENT}

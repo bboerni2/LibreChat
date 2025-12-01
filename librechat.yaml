@@ -1,5 +1,4 @@
 version: "1.2.8"
-debug: true
 cache: true
 
 endpoints:
