@@ -36,4 +36,5 @@ endpoints:
       serverless: true
 
       models:
+        default: "gpt-5"
         gpt-5: true
