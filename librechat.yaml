@@ -2,10 +2,9 @@ version: "1.2.8"
 cache: true
 
 endpoints:
-
-  ########################################################
-  # 1) Azure OpenAI (balchat) – GPT-4.1
-  ########################################################
+  #############################################
+  # Azure OpenAI – balchat (gpt-4.1) + GPT-5
+  #############################################
   azureOpenAI:
     titleModel: "gpt-4.1"
     plugins: true
@@ -15,6 +14,7 @@ endpoints:
     titleMethod: "completion"
 
     groups:
+      # ---- Gruppe A: balchat (gpt-4.1) ----
       - group: "balchat"
         apiKey: "${AZURE_OPENAI_API_KEY}"
         instanceName: "${AZURE_OPENAI_INSTANCE}"
@@ -24,17 +24,12 @@ endpoints:
           gpt-4.1:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT41}"
 
+      # ---- Gruppe B: GPT-5 (swedencentral) ----
+      - group: "swedencentral-gpt5"
+        apiKey: "${AZURE_GPT5_API_KEY}"
+        instanceName: "${AZURE_GPT5_INSTANCE}"
+        version: "${AZURE_GPT5_API_VERSION}"
 
-  ########################################################
-  # 2) Azure AI Foundry (GPT-5, serverless)
-  #    → custom MUST BE AN ARRAY []
-  ########################################################
-  custom:
-    - group: "foundry-gpt5"
-      apiKey: "${AZURE_FOUNDRY_API_KEY_GPT5}"
-      baseURL: "${AZURE_FOUNDRY_BASEURL_GPT5}"
-      serverless: true
-
-      models:
-        gpt-5-chat:
-            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT5chat}"
+        models:
+          gpt-5-chat:
+            deploymentName: "${AZURE_GPT5_DEPLOYMENT}"
