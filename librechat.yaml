@@ -5,7 +5,7 @@ endpoints:
   azureOpenAI:
     titleModel: "gpt-4.1"
     plugins: true
-    assistants: true
+    #assistants: true
     summarize: true
     summaryModel: "gpt-4.1"
     titleConvo: true
