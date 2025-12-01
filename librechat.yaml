@@ -36,5 +36,5 @@ endpoints:
       serverless: true
 
       models:
-        default: "gpt-5"
-        gpt-5: true
+        gpt-5-chat:
+            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT5chat}"
