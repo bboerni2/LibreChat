@@ -26,10 +26,10 @@ endpoints:
 
       # ---- Gruppe B: GPT-5 (swedencentral) ----
       - group: "swedencentral-gpt5.1"
-        apiKey: "${AZURE_GPT5_API_KEY}"
-        instanceName: "${AZURE_GPT5_INSTANCE}"
-        version: "${AZURE_GPT5_API_VERSION}"
+        apiKey: "${AZURE_GPT51_API_KEY}"
+        instanceName: "${AZURE_GPT51_INSTANCE}"
+        version: "${AZURE_GPT51_API_VERSION}"
 
         models:
           gpt-5-chat:
-            deploymentName: "${AZURE_GPT5_DEPLOYMENT}"
+            deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
