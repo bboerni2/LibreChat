@@ -1,3 +1,6 @@
+version: "1.2.8"   
+cache: true 
+
 endpoints:
   azureOpenAI:
     titleModel: "gpt-4.1"
@@ -11,8 +14,8 @@ endpoints:
     groups:
       - group: "balchat"
         apiKey: "${AZURE_OPENAI_API_KEY}"
-        instanceName: "${AZURE_OPENAI_INSTANCE}" 
-        version: "${AZURE_OPENAI_API_VERSION}" 
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
         models:
           gpt-4.1:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT41}"
