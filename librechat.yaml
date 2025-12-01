@@ -24,7 +24,7 @@ endpoints:
           gpt-4.1:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT41}"
 
-      # ---- Gruppe B: GPT-5 (swedencentral) ----
+      # ---- Gruppe B: hause-min5ar24-swedencentral (gpt-5.1-chat) ----
       - group: "swedencentral-gpt5.1"
         apiKey: "${AZURE_GPT51_API_KEY}"
         instanceName: "${AZURE_GPT51_INSTANCE}"
