@@ -118,7 +118,22 @@ services:
 
     volumes:
       - ./librechat.yaml:/app/librechat.yaml
+      - /var/docker/librechat/images:/app/client/public/images
+      - /var/docker/librechat/uploads:/app/uploads
+      - /var/docker/librechat/logs:/app/logs
 
+  mongodb:
+    volumes:
+      - /var/docker/librechat/mongo:/data/db
+
+  meilisearch:
+    volumes:
+      - /var/docker/librechat/meili:/meili_data
+
+  vectordb:
+    volumes:
+      - /var/docker/librechat/pgdata2:/var/lib/postgresql/data
+      
 # ---------------------------------------------------
 
 # services:
