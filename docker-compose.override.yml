@@ -158,7 +158,7 @@ services:
       ###########################################################################
       # 🤖 Azure OpenAI | Microsoft Foundry 
       ###########################################################################
-      
+
       # OpenAI / GPT-4.1
       AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY}
       AZURE_OPENAI_INSTANCE: ${AZURE_OPENAI_INSTANCE}
@@ -182,6 +182,196 @@ services:
       - /var/docker/librechat/images:/app/client/public/images
       - /var/docker/librechat/uploads:/app/uploads
       - /var/docker/librechat/logs:/app/logs
+
+  api-plus:
+    image: ghcr.io/danny-avila/librechat:latest
+    container_name: librechat-api-plus
+    restart: unless-stopped
+
+    depends_on:
+      - mongodb
+      - meilisearch
+      - vectordb
+
+    ports:
+      - "${PORT_PLUS:-3082}:3080"
+
+    volumes:
+      - ./librechat-plus.yaml:/app/librechat-plus.yaml
+      - /var/docker/librechat/images:/app/client/public/images
+      - /var/docker/librechat/uploads:/app/uploads
+      - /var/docker/librechat/logs-plus:/app/logs
+
+    environment:
+      LIBRECHAT_CONFIG_PATH: /app/librechat-plus.yaml
+      APP_TITLE: ${APP_TITLE_PLUS:-LibreChat Plus}
+      ###########################################################################
+      # 🔵 Basis / Debug
+      ###########################################################################
+      DEBUG_CONSOLE: ${DEBUG_CONSOLE}
+      DEBUG_LOGGING: ${DEBUG_LOGGING}
+      DEBUG_OPENAI: ${DEBUG_OPENAI}
+      DEBUG_PLUGINS: ${DEBUG_PLUGINS}
+      CONSOLE_JSON: ${CONSOLE_JSON}
+      NO_INDEX: ${NO_INDEX}
+      TRUST_PROXY: ${TRUST_PROXY}
+
+      ###########################################################################
+      # 🌐 Domains
+      ###########################################################################
+      DOMAIN_CLIENT: ${DOMAIN_CLIENT}
+      DOMAIN_SERVER: ${DOMAIN_SERVER}
+
+      ###########################################################################
+      # 🧑‍💻 Auth-Optionen 
+      ###########################################################################
+      ALLOW_SOCIAL_LOGIN: ${ALLOW_SOCIAL_LOGIN}
+      ALLOW_EMAIL_LOGIN: ${ALLOW_EMAIL_LOGIN}
+      ALLOW_REGISTRATION: ${ALLOW_REGISTRATION}
+      ALLOW_PASSWORD_RESET: ${ALLOW_PASSWORD_RESET}
+      ALLOW_UNVERIFIED_EMAIL_LOGIN: ${ALLOW_UNVERIFIED_EMAIL_LOGIN}
+
+      ###########################################################################
+      # 🔐 Krypto / Tokens 
+      ###########################################################################
+      CREDS_KEY: ${CREDS_KEY}
+      CREDS_IV: ${CREDS_IV}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      SESSION_EXPIRY: ${SESSION_EXPIRY}
+      REFRESH_TOKEN_EXPIRY: ${REFRESH_TOKEN_EXPIRY}
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
+
+      ###########################################################################
+      # 🪪 OpenID-Login
+      ###########################################################################
+      OPENID_CLIENT_ID: ${OPENID_CLIENT_ID}
+      OPENID_CLIENT_SECRET: ${OPENID_CLIENT_SECRET}
+      OPENID_ISSUER: ${OPENID_ISSUER}
+      OPENID_SESSION_SECRET: ${OPENID_SESSION_SECRET}
+      OPENID_SCOPE: ${OPENID_SCOPE}
+      OPENID_CALLBACK_URL: ${OPENID_CALLBACK_URL}
+
+      # Rollen / Claims
+      OPENID_REQUIRED_ROLE: ${OPENID_REQUIRED_ROLE}
+      OPENID_REQUIRED_ROLE_TOKEN_KIND: ${OPENID_REQUIRED_ROLE_TOKEN_KIND}
+      OPENID_REQUIRED_ROLE_PARAMETER_PATH: ${OPENID_REQUIRED_ROLE_PARAMETER_PATH}
+
+      OPENID_ADMIN_ROLE: ${OPENID_ADMIN_ROLE}
+      OPENID_ADMIN_ROLE_TOKEN_KIND: ${OPENID_ADMIN_ROLE_TOKEN_KIND}
+      OPENID_ADMIN_ROLE_PARAMETER_PATH: ${OPENID_ADMIN_ROLE_PARAMETER_PATH}
+
+      # UI / Verhalten
+      OPENID_BUTTON_LABEL: ${OPENID_BUTTON_LABEL}
+      OPENID_IMAGE_URL: ${OPENID_IMAGE_URL}
+      OPENID_AUTO_REDIRECT: ${OPENID_AUTO_REDIRECT}
+      OPENID_USE_PKCE: ${OPENID_USE_PKCE}
+      OPENID_REUSE_TOKENS: ${OPENID_REUSE_TOKENS}
+
+      # People Search / Graph
+      USE_ENTRA_ID_FOR_PEOPLE_SEARCH: ${USE_ENTRA_ID_FOR_PEOPLE_SEARCH}
+      ENTRA_ID_INCLUDE_OWNERS_AS_MEMBERS: ${ENTRA_ID_INCLUDE_OWNERS_AS_MEMBERS}
+      OPENID_GRAPH_SCOPES: ${OPENID_GRAPH_SCOPES}
+
+      ###########################################################################
+      # 🟡 SAML
+      ###########################################################################
+      # SAML_ENTRY_POINT: ${SAML_ENTRY_POINT}
+      # SAML_ISSUER: ${SAML_ISSUER}
+      # SAML_CERT: ${SAML_CERT}
+      # SAML_CALLBACK_URL: ${SAML_CALLBACK_URL}
+      # SAML_SESSION_SECRET: ${SAML_SESSION_SECRET}
+      # SAML_EMAIL_CLAIM: ${SAML_EMAIL_CLAIM}
+      # SAML_USERNAME_CLAIM: ${SAML_USERNAME_CLAIM}
+      # SAML_GIVEN_NAME_CLAIM: ${SAML_GIVEN_NAME_CLAIM}
+      # SAML_FAMILY_NAME_CLAIM: ${SAML_FAMILY_NAME_CLAIM}
+      # SAML_PICTURE_CLAIM: ${SAML_PICTURE_CLAIM}
+      # SAML_NAME_CLAIM: ${SAML_NAME_CLAIM}
+      # SAML_BUTTON_LABEL: ${SAML_BUTTON_LABEL}
+      # SAML_IMAGE_URL: ${SAML_IMAGE_URL}
+
+      ###########################################################################
+      # 🟡 LDAP
+      ###########################################################################
+      # LDAP_URL: ${LDAP_URL}
+      # LDAP_BIND_DN: ${LDAP_BIND_DN}
+      # LDAP_BIND_CREDENTIALS: ${LDAP_BIND_CREDENTIALS}
+      # LDAP_USER_SEARCH_BASE: ${LDAP_USER_SEARCH_BASE}
+      # LDAP_CA_CERT_PATH: ${LDAP_CA_CERT_PATH}
+
+      ###########################################################################
+      # ✉️ Mail
+      ###########################################################################
+      # EMAIL_SERVICE: ${EMAIL_SERVICE}
+      # EMAIL_HOST: ${EMAIL_HOST}
+      # EMAIL_PORT: ${EMAIL_PORT}
+      # EMAIL_ENCRYPTION: ${EMAIL_ENCRYPTION}
+      # EMAIL_ENCRYPTION_HOSTNAME: ${EMAIL_ENCRYPTION_HOSTNAME}
+      # EMAIL_ALLOW_SELFSIGNED: ${EMAIL_ALLOW_SELFSIGNED}
+      # EMAIL_USERNAME: ${EMAIL_USERNAME}
+      # EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+      # EMAIL_FROM_NAME: ${EMAIL_FROM_NAME}
+      # EMAIL_FROM: ${EMAIL_FROM}
+
+      ###########################################################################
+      # 🟡 Firebase
+      ###########################################################################
+      # FIREBASE_API_KEY: ${FIREBASE_API_KEY}
+      # FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN}
+      # FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
+      # FIREBASE_STORAGE_BUCKET: ${FIREBASE_STORAGE_BUCKET}
+      # FIREBASE_MESSAGING_SENDER_ID: ${FIREBASE_MESSAGING_SENDER_ID}
+      # FIREBASE_APP_ID: ${FIREBASE_APP_ID}
+
+      ###########################################################################
+      # 🟡 AWS S3 / Object Storage
+      ###########################################################################
+      # AWS_ENDPOINT_URL: ${AWS_ENDPOINT_URL}
+      # AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      # AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      # AWS_REGION: ${AWS_REGION}
+      # AWS_BUCKET_NAME: ${AWS_BUCKET_NAME}
+
+      ###########################################################################
+      # 🟡 Azure Storage
+      ###########################################################################
+      # AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING}
+      # AZURE_STORAGE_PUBLIC_ACCESS: ${AZURE_STORAGE_PUBLIC_ACCESS}
+      # AZURE_CONTAINER_NAME: ${AZURE_CONTAINER_NAME}
+
+      ###########################################################################
+      # 🔗 Sharing / Branding
+      ###########################################################################
+      ALLOW_SHARED_LINKS: ${ALLOW_SHARED_LINKS}
+      ALLOW_SHARED_LINKS_PUBLIC: ${ALLOW_SHARED_LINKS_PUBLIC}
+      HELP_AND_FAQ_URL: ${HELP_AND_FAQ_URL}
+
+      ###########################################################################
+      # 🌦️ Sonstiger Kram 
+      ###########################################################################
+      OPENWEATHER_API_KEY: ${OPENWEATHER_API_KEY}
+
+      ###########################################################################
+      # 🤖 Azure OpenAI | Microsoft Foundry 
+      ###########################################################################
+
+      # OpenAI / GPT-4.1
+      AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY}
+      AZURE_OPENAI_INSTANCE: ${AZURE_OPENAI_INSTANCE}
+      AZURE_OPENAI_API_VERSION: ${AZURE_OPENAI_API_VERSION}
+      AZURE_OPENAI_DEPLOYMENT_GPT41: ${AZURE_OPENAI_DEPLOYMENT_GPT41}
+      
+      # Foundry / GPT-5.1
+      AZURE_FOUNDRY_API_KEY: ${AZURE_FOUNDRY_API_KEY}
+      AZURE_FOUNDRY_BASEURL: ${AZURE_FOUNDRY_BASEURL}
+      AZURE_FOUNDRY_BASEURL_GPT51: ${AZURE_FOUNDRY_BASEURL_GPT51}
+
+      AZURE_GPT51_API_KEY: ${AZURE_GPT51_API_KEY}
+      AZURE_GPT51_INSTANCE: ${AZURE_GPT51_INSTANCE}
+      AZURE_GPT51_API_VERSION: ${AZURE_GPT51_API_VERSION}
+      AZURE_GPT51_DEPLOYMENT: ${AZURE_GPT51_DEPLOYMENT}
+
+      ENDPOINTS: ${ENDPOINTS_PLUS}
 
   mongodb:
     volumes:
