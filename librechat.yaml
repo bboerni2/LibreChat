@@ -3,33 +3,24 @@ cache: true
 
 endpoints:
   #############################################
-  # Azure OpenAI – balchat (gpt-4.1) + GPT-5
+  # Azure OpenAI – balchat main GPT-5-nano
   #############################################
   azureOpenAI:
-    titleModel: "gpt-4.1"
+    titleModel: "gpt-5"
     plugins: true
     summarize: true
-    summaryModel: "gpt-4.1"
+    summaryModel: "gpt-5"
     titleConvo: true
     titleMethod: "completion"
 
     groups:
-      # ---- Gruppe A: balchat (gpt-4.1) ----
+      # ---- Gruppe A: balchat (gpt-5-nano) ----
       - group: "balchat"
         apiKey: "${AZURE_OPENAI_API_KEY}"
         instanceName: "${AZURE_OPENAI_INSTANCE}"
         version: "${AZURE_OPENAI_API_VERSION}"
 
         models:
-          gpt-4.1:
-            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT41}"
+          gpt-5:
+            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT5nano}"
 
-      # ---- Gruppe B: hause-min5ar24-swedencentral (gpt-5.1-chat) ----
-      - group: "hause-min5ar24-swedencentral"
-        apiKey: "${AZURE_GPT51_API_KEY}"
-        instanceName: "${AZURE_GPT51_INSTANCE}"
-        version: "${AZURE_GPT51_API_VERSION}"
-
-        models:
-          gpt-5.1:
-            deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
