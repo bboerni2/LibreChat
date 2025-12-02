@@ -230,8 +230,8 @@ services:
       ###########################################################################
       # 🌐 Domains
       ###########################################################################
-      DOMAIN_CLIENT: ${DOMAIN_CLIENT}
-      DOMAIN_SERVER: ${DOMAIN_SERVER}
+      DOMAIN_CLIENT: ${DOMAIN_CLIENT_PLUS}
+      DOMAIN_SERVER: ${DOMAIN_SERVER_PLUS}
 
       ###########################################################################
       # 🧑‍💻 Auth-Optionen 
