@@ -1,37 +1,53 @@
 # Please consult our docs for more info: https://www.librechat.ai/docs/configuration/docker_override
-
-# TO USE THIS FILE, FIRST UNCOMMENT THE LINE ('services:')
-
-# THEN UNCOMMENT ONLY THE SECTION OR SECTIONS CONTAINING THE CHANGES YOU WANT TO APPLY
-# SAVE THIS FILE AS 'docker-compose.override.yaml'
-# AND USE THE 'docker compose build' & 'docker compose up -d' COMMANDS AS YOU WOULD NORMALLY DO
-
-# WARNING: YOU CAN ONLY SPECIFY EVERY SERVICE NAME ONCE (api, mongodb, meilisearch, ...)
-# IF YOU WANT TO OVERRIDE MULTIPLE SETTINGS IN ONE SERVICE YOU WILL HAVE TO EDIT ACCORDINGLY
-
-# EXAMPLE: if you want to use the config file and the latest numbered release docker image the result will be:
-
-# ---------------------------------------------------
-# override with portainer variables
+#
+# Dieses Override wird zusammen mit Portainer-Variablen verwendet:
+# - .env (im Repo) enthält die public Defaults
+# - Portainer hält die echten Werte (v.a. Secrets)
+# - Dieses File mapped nur die Variablen, die aus Portainer ins Deployment sollen.
 
 services:
   api:
     environment:
-      # Nur das, was du wirklich aus Portainer steuern willst
+      ###########################################################################
+      # 🔵 Basis / Debug
+      ###########################################################################
       DEBUG_CONSOLE: ${DEBUG_CONSOLE}
+      DEBUG_LOGGING: ${DEBUG_LOGGING}
+      DEBUG_OPENAI: ${DEBUG_OPENAI}
+      DEBUG_PLUGINS: ${DEBUG_PLUGINS}
+      CONSOLE_JSON: ${CONSOLE_JSON}
+      NO_INDEX: ${NO_INDEX}
+      TRUST_PROXY: ${TRUST_PROXY}
 
-      # Basis-URLs (falls du die flexibel halten möchtest)
+      ###########################################################################
+      # 🌐 Domains
+      ###########################################################################
       DOMAIN_CLIENT: ${DOMAIN_CLIENT}
       DOMAIN_SERVER: ${DOMAIN_SERVER}
 
-      # Login-Optionen
+      ###########################################################################
+      # 🧑‍💻 Auth-Optionen 
+      ###########################################################################
       ALLOW_SOCIAL_LOGIN: ${ALLOW_SOCIAL_LOGIN}
       ALLOW_EMAIL_LOGIN: ${ALLOW_EMAIL_LOGIN}
       ALLOW_REGISTRATION: ${ALLOW_REGISTRATION}
       ALLOW_PASSWORD_RESET: ${ALLOW_PASSWORD_RESET}
       ALLOW_UNVERIFIED_EMAIL_LOGIN: ${ALLOW_UNVERIFIED_EMAIL_LOGIN}
 
-      # OpenID / Entra
+      ###########################################################################
+      # 🔐 Krypto / Tokens 
+      ###########################################################################
+      CREDS_KEY: ${CREDS_KEY}
+      CREDS_IV: ${CREDS_IV}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      SESSION_EXPIRY: ${SESSION_EXPIRY}
+      REFRESH_TOKEN_EXPIRY: ${REFRESH_TOKEN_EXPIRY}
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY}
+
+      ###########################################################################
+      # 🪪 OpenID-Login
+      ###########################################################################
       OPENID_CLIENT_ID: ${OPENID_CLIENT_ID}
       OPENID_CLIENT_SECRET: ${OPENID_CLIENT_SECRET}
       OPENID_ISSUER: ${OPENID_ISSUER}
@@ -39,6 +55,7 @@ services:
       OPENID_SCOPE: ${OPENID_SCOPE}
       OPENID_CALLBACK_URL: ${OPENID_CALLBACK_URL}
 
+      # Rollen / Claims
       OPENID_REQUIRED_ROLE: ${OPENID_REQUIRED_ROLE}
       OPENID_REQUIRED_ROLE_TOKEN_KIND: ${OPENID_REQUIRED_ROLE_TOKEN_KIND}
       OPENID_REQUIRED_ROLE_PARAMETER_PATH: ${OPENID_REQUIRED_ROLE_PARAMETER_PATH}
@@ -47,75 +64,112 @@ services:
       OPENID_ADMIN_ROLE_TOKEN_KIND: ${OPENID_ADMIN_ROLE_TOKEN_KIND}
       OPENID_ADMIN_ROLE_PARAMETER_PATH: ${OPENID_ADMIN_ROLE_PARAMETER_PATH}
 
+      # UI / Verhalten
       OPENID_BUTTON_LABEL: ${OPENID_BUTTON_LABEL}
       OPENID_IMAGE_URL: ${OPENID_IMAGE_URL}
       OPENID_AUTO_REDIRECT: ${OPENID_AUTO_REDIRECT}
       OPENID_USE_PKCE: ${OPENID_USE_PKCE}
       OPENID_REUSE_TOKENS: ${OPENID_REUSE_TOKENS}
+
+      # People Search / Graph
       USE_ENTRA_ID_FOR_PEOPLE_SEARCH: ${USE_ENTRA_ID_FOR_PEOPLE_SEARCH}
       ENTRA_ID_INCLUDE_OWNERS_AS_MEMBERS: ${ENTRA_ID_INCLUDE_OWNERS_AS_MEMBERS}
       OPENID_GRAPH_SCOPES: ${OPENID_GRAPH_SCOPES}
 
-      SAML_ENTRY_POINT: ${SAML_ENTRY_POINT}
-      SAML_ISSUER: ${SAML_ISSUER}
-      SAML_CERT: ${SAML_CERT}
-      SAML_CALLBACK_URL: ${SAML_CALLBACK_URL}
-      SAML_SESSION_SECRET: ${SAML_SESSION_SECRET}
-      SAML_EMAIL_CLAIM: ${SAML_EMAIL_CLAIM}
-      SAML_USERNAME_CLAIM: ${SAML_USERNAME_CLAIM}
-      SAML_GIVEN_NAME_CLAIM: ${SAML_GIVEN_NAME_CLAIM}
-      SAML_FAMILY_NAME_CLAIM: ${SAML_FAMILY_NAME_CLAIM}
-      SAML_PICTURE_CLAIM: ${SAML_PICTURE_CLAIM}
-      SAML_NAME_CLAIM: ${SAML_NAME_CLAIM}
-      SAML_BUTTON_LABEL: ${SAML_BUTTON_LABEL}
-      SAML_IMAGE_URL: ${SAML_IMAGE_URL}
+      ###########################################################################
+      # 🟡 SAML
+      ###########################################################################
+      # SAML_ENTRY_POINT: ${SAML_ENTRY_POINT}
+      # SAML_ISSUER: ${SAML_ISSUER}
+      # SAML_CERT: ${SAML_CERT}
+      # SAML_CALLBACK_URL: ${SAML_CALLBACK_URL}
+      # SAML_SESSION_SECRET: ${SAML_SESSION_SECRET}
+      # SAML_EMAIL_CLAIM: ${SAML_EMAIL_CLAIM}
+      # SAML_USERNAME_CLAIM: ${SAML_USERNAME_CLAIM}
+      # SAML_GIVEN_NAME_CLAIM: ${SAML_GIVEN_NAME_CLAIM}
+      # SAML_FAMILY_NAME_CLAIM: ${SAML_FAMILY_NAME_CLAIM}
+      # SAML_PICTURE_CLAIM: ${SAML_PICTURE_CLAIM}
+      # SAML_NAME_CLAIM: ${SAML_NAME_CLAIM}
+      # SAML_BUTTON_LABEL: ${SAML_BUTTON_LABEL}
+      # SAML_IMAGE_URL: ${SAML_IMAGE_URL}
 
-      LDAP_URL: ${LDAP_URL}
-      LDAP_BIND_DN: ${LDAP_BIND_DN}
-      LDAP_BIND_CREDENTIALS: ${LDAP_BIND_CREDENTIALS}
-      LDAP_USER_SEARCH_BASE: ${LDAP_USER_SEARCH_BASE}
-      LDAP_CA_CERT_PATH: ${LDAP_CA_CERT_PATH}
+      ###########################################################################
+      # 🟡 LDAP
+      ###########################################################################
+      # LDAP_URL: ${LDAP_URL}
+      # LDAP_BIND_DN: ${LDAP_BIND_DN}
+      # LDAP_BIND_CREDENTIALS: ${LDAP_BIND_CREDENTIALS}
+      # LDAP_USER_SEARCH_BASE: ${LDAP_USER_SEARCH_BASE}
+      # LDAP_CA_CERT_PATH: ${LDAP_CA_CERT_PATH}
 
-      EMAIL_SERVICE: ${EMAIL_SERVICE}
-      EMAIL_HOST: ${EMAIL_HOST}
-      EMAIL_PORT: ${EMAIL_PORT}
-      EMAIL_ENCRYPTION: ${EMAIL_ENCRYPTION}
-      EMAIL_ENCRYPTION_HOSTNAME: ${EMAIL_ENCRYPTION_HOSTNAME}
-      EMAIL_ALLOW_SELFSIGNED: ${EMAIL_ALLOW_SELFSIGNED}
-      EMAIL_USERNAME: ${EMAIL_USERNAME}
-      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
-      EMAIL_FROM_NAME: ${EMAIL_FROM_NAME}
-      EMAIL_FROM: ${EMAIL_FROM}
+      ###########################################################################
+      # ✉️ Mail
+      ###########################################################################
+      # EMAIL_SERVICE: ${EMAIL_SERVICE}
+      # EMAIL_HOST: ${EMAIL_HOST}
+      # EMAIL_PORT: ${EMAIL_PORT}
+      # EMAIL_ENCRYPTION: ${EMAIL_ENCRYPTION}
+      # EMAIL_ENCRYPTION_HOSTNAME: ${EMAIL_ENCRYPTION_HOSTNAME}
+      # EMAIL_ALLOW_SELFSIGNED: ${EMAIL_ALLOW_SELFSIGNED}
+      # EMAIL_USERNAME: ${EMAIL_USERNAME}
+      # EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+      # EMAIL_FROM_NAME: ${EMAIL_FROM_NAME}
+      # EMAIL_FROM: ${EMAIL_FROM}
 
-      FIREBASE_API_KEY: ${FIREBASE_API_KEY}
-      FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN}
-      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
-      FIREBASE_STORAGE_BUCKET: ${FIREBASE_STORAGE_BUCKET}
-      FIREBASE_MESSAGING_SENDER_ID: ${FIREBASE_MESSAGING_SENDER_ID}
-      FIREBASE_APP_ID: ${FIREBASE_APP_ID}
+      ###########################################################################
+      # 🟡 Firebase
+      ###########################################################################
+      # FIREBASE_API_KEY: ${FIREBASE_API_KEY}
+      # FIREBASE_AUTH_DOMAIN: ${FIREBASE_AUTH_DOMAIN}
+      # FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
+      # FIREBASE_STORAGE_BUCKET: ${FIREBASE_STORAGE_BUCKET}
+      # FIREBASE_MESSAGING_SENDER_ID: ${FIREBASE_MESSAGING_SENDER_ID}
+      # FIREBASE_APP_ID: ${FIREBASE_APP_ID}
 
-      AWS_ENDPOINT_URL: ${AWS_ENDPOINT_URL}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
-      AWS_REGION: ${AWS_REGION}
-      AWS_BUCKET_NAME: ${AWS_BUCKET_NAME}
+      ###########################################################################
+      # 🟡 AWS S3 / Object Storage
+      ###########################################################################
+      # AWS_ENDPOINT_URL: ${AWS_ENDPOINT_URL}
+      # AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      # AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      # AWS_REGION: ${AWS_REGION}
+      # AWS_BUCKET_NAME: ${AWS_BUCKET_NAME}
 
-      AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING}
-      AZURE_STORAGE_PUBLIC_ACCESS: ${AZURE_STORAGE_PUBLIC_ACCESS}
-      AZURE_CONTAINER_NAME: ${AZURE_CONTAINER_NAME}
+      ###########################################################################
+      # 🟡 Azure Storage
+      ###########################################################################
+      # AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING}
+      # AZURE_STORAGE_PUBLIC_ACCESS: ${AZURE_STORAGE_PUBLIC_ACCESS}
+      # AZURE_CONTAINER_NAME: ${AZURE_CONTAINER_NAME}
 
+      ###########################################################################
+      # 🔗 Sharing / Branding
+      ###########################################################################
       ALLOW_SHARED_LINKS: ${ALLOW_SHARED_LINKS}
       ALLOW_SHARED_LINKS_PUBLIC: ${ALLOW_SHARED_LINKS_PUBLIC}
       APP_TITLE: ${APP_TITLE}
       HELP_AND_FAQ_URL: ${HELP_AND_FAQ_URL}
+
+      ###########################################################################
+      # 🌦️ Sonstiger Kram 
+      ###########################################################################
       OPENWEATHER_API_KEY: ${OPENWEATHER_API_KEY}
-      AZURE_FOUNDRY_API_KEY: ${AZURE_FOUNDRY_API_KEY}
-      AZURE_FOUNDRY_BASEURL: ${AZURE_FOUNDRY_BASEURL}
+
+      ###########################################################################
+      # 🤖 Azure OpenAI | Microsoft Foundry 
+      ###########################################################################
+      
+      # OpenAI / GPT-4.1
       AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY}
       AZURE_OPENAI_INSTANCE: ${AZURE_OPENAI_INSTANCE}
       AZURE_OPENAI_API_VERSION: ${AZURE_OPENAI_API_VERSION}
       AZURE_OPENAI_DEPLOYMENT_GPT41: ${AZURE_OPENAI_DEPLOYMENT_GPT41}
+      
+      # Foundry / GPT-5.1
+      AZURE_FOUNDRY_API_KEY: ${AZURE_FOUNDRY_API_KEY}
+      AZURE_FOUNDRY_BASEURL: ${AZURE_FOUNDRY_BASEURL}
       AZURE_FOUNDRY_BASEURL_GPT51: ${AZURE_FOUNDRY_BASEURL_GPT51}
+
       AZURE_GPT51_API_KEY: ${AZURE_GPT51_API_KEY}
       AZURE_GPT51_INSTANCE: ${AZURE_GPT51_INSTANCE}
       AZURE_GPT51_API_VERSION: ${AZURE_GPT51_API_VERSION}
@@ -140,174 +194,3 @@ services:
   vectordb:
     volumes:
       - /var/docker/librechat/pgdata2:/var/lib/postgresql/data
-
-# ---------------------------------------------------
-
-# services:
-#   api:
-#     volumes:
-#     - type: bind
-#       source: ./librechat.yaml
-#       target: /app/librechat.yaml
-#     image: ghcr.io/danny-avila/librechat:latest
-
-# ---------------------------------------------------
-
-# services:
-
-# # USE LIBRECHAT CONFIG FILE
-#   api:
-#     volumes:
-#     - type: bind
-#       source: ./librechat.yaml
-#       target: /app/librechat.yaml
-
-# # LOCAL BUILD
-#   api:
-#     image: librechat
-#     build:
-#       context: .
-#       target: node
-
-# # BUILD FROM LATEST IMAGE
-#   api:
-#     image: ghcr.io/danny-avila/librechat-dev:latest
-
-# # BUILD FROM LATEST IMAGE (NUMBERED RELEASE)
-#   api:
-#     image: ghcr.io/danny-avila/librechat:latest
-
-# # BUILD FROM LATEST API IMAGE
-#   api:
-#     image: ghcr.io/danny-avila/librechat-dev-api:latest
-
-# # BUILD FROM LATEST API IMAGE (NUMBERED RELEASE)
-#   api:
-#     image: ghcr.io/danny-avila/librechat-api:latest
-
-# # ADD SAML CERT FILE
-#   api:
-#     volumes:
-#     - type: bind
-#       source: ./your_cert.pem
-#       target: /app/your_cert.pem
-
-# # ADD MONGO-EXPRESS
-#   mongo-express:
-#     image: mongo-express
-#     container_name: mongo-express
-#     environment:
-#       ME_CONFIG_MONGODB_SERVER: mongodb
-#       ME_CONFIG_BASICAUTH_USERNAME: admin
-#       ME_CONFIG_BASICAUTH_PASSWORD: password
-#     ports:
-#       - '8081:8081'
-#     depends_on:
-#       - mongodb
-#     restart: always
-
-# # USE MONGODB V4.4.18 - FOR OLDER CPU WITHOUT AVX SUPPORT
-#   mongodb:
-#     image: mongo:4.4.18
-
-# # DISABLE THE MONGODB CONTAINER - YOU NEED TO SET AN ALTERNATIVE MONGODB URI IN THE .ENV FILE
-#   api:
-#     environment:
-#       - MONGO_URI=${MONGO_URI}
-#   mongodb:
-#     image: tianon/true
-#     command: ""
-#     entrypoint: ""
-
-# # EXPOSE MONGODB PORTS - USE CAREFULLY, THIS MAKES YOUR DATABASE VULNERABLE TO ATTACKS
-#   mongodb:
-#     ports:
-#       - 27018:27017
-
-# # DISABLE MEILISEARCH
-#   meilisearch:
-#     profiles:
-#       - donotstart
-
-# # EXPOSE MEILISEARCH PORTS - DO NOT USE THE DEFAULT VALUE FOR THE MASTER KEY IF YOU DO THIS
-#   meilisearch:
-#     ports:
-#       - 7700:7700
-
-# # USE RAG API IMAGE WITH LOCAL EMBEDDINGS SUPPORT
-#  rag_api:
-#    image: ghcr.io/danny-avila/librechat-rag-api-dev:latest
-# # For Linux user:
-#    extra_hosts:
-#      - "host.docker.internal:host-gateway"
-
-# # ADD OLLAMA
-#  ollama:
-#    image: ollama/ollama:latest
-#    deploy:
-#      resources:
-#        reservations:
-#          devices:
-#            - driver: nvidia
-#              capabilities: [compute, utility]
-#    ports:
-#      - "11434:11434"
-#    volumes:
-#      - ./ollama:/root/.ollama
-
-# # ADD LITELLM BASIC - NEED TO CONFIGURE litellm-config.yaml, ONLY NEED ENV TO ENABLE REDIS FOR CACHING OR LANGFUSE FOR MONITORING
-#  litellm:
-#    image: ghcr.io/berriai/litellm:main-latest
-#    volumes:
-#      - ./litellm/litellm-config.yaml:/app/config.yaml
-#      - ./litellm/application_default_credentials.json:/app/application_default_credentials.json # only if using Google Vertex
-#    ports:
-#      - "4000:8000"
-#    command: [ "--config", "/app/config.yaml", "--port", "8000", "--num_workers", "8" ]
-#    environment:
-#      OPENAI_API_KEY: none ## needs to be set if ollama's openai api compatibility is used
-#      GOOGLE_APPLICATION_CREDENTIALS: /app/application_default_credentials.json ## only if using Google Vertex
-#      REDIS_HOST: redis
-#      REDIS_PORT: 6379
-#      REDIS_PASSWORD: RedisChangeMe
-#      LANGFUSE_PUBLIC_KEY: pk-lf-RandomStringFromLangfuseWebInterface
-#      LANGFUSE_SECRET_KEY: sk-lf-RandomStringFromLangfuseWebInterface
-#      LANGFUSE_HOST: http://langfuse-server:3000
-
-# # ADD LITELLM CACHING
-#  redis:
-#    image: redis:7-alpine
-#    command:
-#    - sh
-#    - -c # this is to evaluate the $REDIS_PASSWORD from the env
-#    - redis-server --appendonly yes --requirepass $$REDIS_PASSWORD ## $$ because of docker-compose
-#    environment:
-#      REDIS_PASSWORD: RedisChangeMe
-#    volumes:
-#    - ./redis:/data
-
-# # ADD LITELLM MONITORING
-#  langfuse-server:
-#    image: ghcr.io/langfuse/langfuse:latest
-#    depends_on:
-#      - db
-#    ports:
-#      - "3000:3000"
-#    environment:
-#      - NODE_ENV=production
-#      - DATABASE_URL=postgresql://postgres:PostgresChangeMe@db:5432/postgres
-#      - NEXTAUTH_SECRET=ChangeMe
-#      - SALT=ChangeMe
-#      - NEXTAUTH_URL=http://localhost:3000
-#      - TELEMETRY_ENABLED=${TELEMETRY_ENABLED:-true}
-#      - NEXT_PUBLIC_SIGN_UP_DISABLED=${NEXT_PUBLIC_SIGN_UP_DISABLED:-false}
-#      - LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES=${LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES:-false}
-#  db:
-#    image: postgres
-#    restart: always
-#    environment:
-#      - POSTGRES_USER=postgres
-#      - POSTGRES_PASSWORD=PostgresChangeMe
-#      - POSTGRES_DB=postgres
-#    volumes:
-#      - ./postgres:/var/lib/postgresql/data
