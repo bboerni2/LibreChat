@@ -184,8 +184,8 @@ services:
       - /var/docker/librechat/logs:/app/logs
 
   api-plus:
-    image: ghcr.io/danny-avila/librechat:latest
-    container_name: librechat-api-plus
+    image: ghcr.io/danny-avila/librechat-dev:latest
+    container_name: Librechat-Plus
     restart: unless-stopped
 
     depends_on:
@@ -197,6 +197,9 @@ services:
       - "${PORT_PLUS:-3082}:3080"
 
     volumes:
+      - type: bind
+        source: ./.env
+        target: /app/.env
       - ./librechat-plus.yaml:/app/librechat-plus.yaml
       - /var/docker/librechat/images:/app/client/public/images
       - /var/docker/librechat/uploads:/app/uploads
@@ -253,7 +256,7 @@ services:
       OPENID_CALLBACK_URL: ${OPENID_CALLBACK_URL}
 
       # Rollen / Claims
-      OPENID_REQUIRED_ROLE: ${OPENID_REQUIRED_ROLE}
+      OPENID_REQUIRED_ROLE: ${OPENID_REQUIRED_ROLE_PLUS}
       OPENID_REQUIRED_ROLE_TOKEN_KIND: ${OPENID_REQUIRED_ROLE_TOKEN_KIND}
       OPENID_REQUIRED_ROLE_PARAMETER_PATH: ${OPENID_REQUIRED_ROLE_PARAMETER_PATH}
 
