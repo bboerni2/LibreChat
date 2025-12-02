@@ -187,6 +187,7 @@ services:
     image: ghcr.io/danny-avila/librechat-dev:latest
     container_name: Librechat-Plus
     restart: unless-stopped
+    user: "${UID}:${GID}"
 
     depends_on:
       - mongodb
