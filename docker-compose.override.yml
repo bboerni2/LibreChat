@@ -201,7 +201,7 @@ services:
       - type: bind
         source: ./.env
         target: /app/.env
-      - ./librechat-plus.yaml:/app/librechat-plus.yaml
+      - ./librechat-plus.yaml:/app/librechat.yaml
       - /var/docker/librechat/images:/app/client/public/images
       - /var/docker/librechat/uploads:/app/uploads
       - /var/docker/librechat/logs-plus:/app/logs
@@ -214,7 +214,7 @@ services:
       MEILI_HOST: http://meilisearch:7700
       RAG_PORT: ${RAG_PORT:-8000}
       RAG_API_URL: http://rag_api:${RAG_PORT:-8000}
-      LIBRECHAT_CONFIG_PATH: /app/librechat-plus.yaml
+      LIBRECHAT_CONFIG_PATH: /app/librechat.yaml
       APP_TITLE: ${APP_TITLE_PLUS:-LibreChat Plus}
       ###########################################################################
       # 🔵 Basis / Debug
