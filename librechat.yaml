@@ -25,7 +25,7 @@ endpoints:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT5nano}"
 
       # ---- Gruppe B: balchat (gpt-4.1) ----
-      - group: "balchat"
+      - group: "balchat2"
         apiKey: "${AZURE_OPENAI_API_KEY}"
         instanceName: "${AZURE_OPENAI_INSTANCE}"
         version: "${AZURE_OPENAI_API_VERSION}"
