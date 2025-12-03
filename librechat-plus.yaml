@@ -24,6 +24,16 @@ endpoints:
           gpt-4.1:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT41}"
 
+      # ---- Gruppe A2: balchat (gpt-4o) ----
+      - group: "balchat2"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
+
+        models:
+          gpt-4o:
+            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT4o}"
+
       # ---- Gruppe B: hause-min5ar24-swedencentral (gpt-5.1-chat) ----
       - group: "hause-min5ar24-swedencentral"
         apiKey: "${AZURE_GPT51_API_KEY}"
@@ -31,5 +41,5 @@ endpoints:
         version: "${AZURE_GPT51_API_VERSION}"
 
         models:
-          gpt-5.1:
+          gpt-5.1-chat:
             deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
