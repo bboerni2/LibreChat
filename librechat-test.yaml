@@ -24,13 +24,4 @@ endpoints:
           gpt-4.1:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT41}"
 
-      # ---- Gruppe A2: balchat (gpt-4o) ----
-      - group: "balchat2"
-        apiKey: "${AZURE_OPENAI_API_KEY}"
-        instanceName: "${AZURE_OPENAI_INSTANCE}"
-        version: "${AZURE_OPENAI_API_VERSION}"
-
-        models:
-          gpt-4o:
-            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT4o}"
 
