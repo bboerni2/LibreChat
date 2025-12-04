@@ -186,18 +186,18 @@ services:
         source: ./.env
         target: /app/.env
       - ./librechat-test.yaml:/app/librechat.yaml
-      - /var/docker/librechat/images:/app/client/public/images
-      - /var/docker/librechat/uploads:/app/uploads
-      - /var/docker/librechat/logs:/app/logs
+      - /var/docker/librechat-test/images:/app/client/public/images
+      - /var/docker/librechat-test/uploads:/app/uploads
+      - /var/docker/librechat-test/logs:/app/logs
 
   mongodb:
     volumes:
-      - /var/docker/librechat/mongo:/data/db
+      - /var/docker/librechat-test/mongo:/data/db
 
   meilisearch:
     volumes:
-      - /var/docker/librechat/meili:/meili_data
+      - /var/docker/librechat-test/meili:/meili_data
 
   vectordb:
     volumes:
-      - /var/docker/librechat/pgdata2:/var/lib/postgresql/data
+      - /var/docker/librechat-test/pgdata2:/var/lib/postgresql/data
