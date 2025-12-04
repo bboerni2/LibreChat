@@ -41,5 +41,5 @@ endpoints:
         version: "${AZURE_GPT51_API_VERSION}"
 
         models:
-          gpt-5.1-chat:
+          gpt-5.1:
             deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
