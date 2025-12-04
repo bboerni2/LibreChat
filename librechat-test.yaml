@@ -6,10 +6,10 @@ endpoints:
   # Azure OpenAI – balchat (gpt-4.1) + GPT-5
   #############################################
   azureOpenAI:
-    titleModel: "gpt-5.1-chat"
+    titleModel: "gpt-4.1"
     plugins: true
     summarize: true
-    summaryModel: "gpt-5.1-chat"
+    summaryModel: "gpt-4.1"
     titleConvo: true
     titleMethod: "completion"
 
