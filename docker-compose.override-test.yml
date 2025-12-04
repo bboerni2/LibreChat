@@ -180,6 +180,8 @@ services:
       AZURE_GPT51_DEPLOYMENT: ${AZURE_GPT51_DEPLOYMENT}
 
       ENDPOINTS: ${ENDPOINTS_PLUS}
+      UID: ${UID}
+      GID: ${GID}
 
     volumes:
       - type: bind
