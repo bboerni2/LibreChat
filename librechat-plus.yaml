@@ -63,3 +63,21 @@ endpoints:
         models:
           gpt-5.1-codex:
             deploymentName: "${AZURE_GPT51_CODEX_DEPLOYMENT}"
+
+modelSpecs:
+  enforce: false
+  prioritize: true
+  list:
+    - name: "gpt-5.1-chat"
+      label: "GPT-5.1 Chat"
+      preset:
+        endpoint: "azureOpenAI"
+        model: "gpt-5.1-chat"
+        modelLabel: "GPT-5.1 Chat"
+
+    - name: "gpt-5.1-codex"
+      label: "GPT-5.1 Codex"
+      preset:
+        endpoint: "azureOpenAI"
+        model: "gpt-5.1-codex"
+        modelLabel: "GPT-5.1 Codex"
