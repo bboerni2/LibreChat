@@ -2,8 +2,7 @@ version: "1.2.8"
 cache: true
 
 interface:
-  modelSelect: false
-  endpointsMenu: true
+  modelSelect: true
   parameters: true
   sidePanel: true
   presets: true
@@ -91,41 +90,41 @@ endpoints:
             deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
 
 
-modelSpecs:
-  enforce: false
-  prioritize: true
-  list:
-    - name: "gpt-5.1-chat"
-      label: "GPT-5.1 Chat"
-      preset:
-        endpoint: "azureOpenAI"
-        model: "gpt-5.1-chat"
-        modelLabel: "GPT-5.1 Chat"
-
-    - name: "gpt-5.1"
-      label: "GPT-5.1"
-      preset:
-        endpoint: "azureOpenAI"
-        model: "gpt-5.1"
-        modelLabel: "GPT-5.1"
-
-    - name: "gpt-5.1-codex"
-      label: "GPT-5.1 Codex"
-      preset:
-        endpoint: "azureOpenAI"
-        model: "gpt-5.1-codex"
-        modelLabel: "GPT-5.1 Codex"
-
-    - name: "gpt-4.1"
-      label: "GPT-4.1"
-      preset:
-        endpoint: "azureOpenAI"
-        model: "gpt-4.1"
-        modelLabel: "GPT-4.1"
-
-    - name: "gpt-4o"
-      label: "GPT-4o"
-      preset:
-        endpoint: "azureOpenAI"
-        model: "gpt-4o"
-        modelLabel: "GPT-4o"
+#modelSpecs:
+#  enforce: false
+#  prioritize: true
+#  list:
+#    - name: "gpt-5.1-chat"
+#      label: "GPT-5.1 Chat"
+#      preset:
+#        endpoint: "azureOpenAI"
+#        model: "gpt-5.1-chat"
+#        modelLabel: "GPT-5.1 Chat"
+#
+#    - name: "gpt-5.1"
+#      label: "GPT-5.1"
+#      preset:
+#        endpoint: "azureOpenAI"
+#        model: "gpt-5.1"
+#        modelLabel: "GPT-5.1"
+#
+#    - name: "gpt-5.1-codex"
+#      label: "GPT-5.1 Codex"
+#      preset:
+#        endpoint: "azureOpenAI"
+#        model: "gpt-5.1-codex"
+#        modelLabel: "GPT-5.1 Codex"
+#
+#    - name: "gpt-4.1"
+#      label: "GPT-4.1"
+#      preset:
+#        endpoint: "azureOpenAI"
+#        model: "gpt-4.1"
+#        modelLabel: "GPT-4.1"
+#
+#    - name: "gpt-4o"
+#      label: "GPT-4o"
+#      preset:
+#        endpoint: "azureOpenAI"
+#        model: "gpt-4o"
+#        modelLabel: "GPT-4o"
