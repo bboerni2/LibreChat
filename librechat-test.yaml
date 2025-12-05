@@ -1,6 +1,9 @@
 version: "1.2.8"
 cache: true
 
+agents:
+  enabled: true
+
 endpoints:
   #############################################
   # Azure OpenAI – balchat (gpt-4.1) + GPT-5
