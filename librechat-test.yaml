@@ -36,7 +36,7 @@ endpoints:
 
       # ---- Gruppe C: hause-min5ar24-swedencentral (gpt-5.1-chat) ----
       - group: "hause-min5ar24-swedencentral-chat"
-        apiKey: "${AZURE_GPT51_API_KEY}"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
         instanceName: "${AZURE_OPENAI_INSTANCE}"
         version: "${AZURE_OPENAI_API_VERSION}"
 
