@@ -6,10 +6,10 @@ endpoints:
   # Azure OpenAI – balchat (gpt-4.1) + GPT-5
   #############################################
   azureOpenAI:
-    titleModel: "gpt-4.1"
+    titleModel: "gpt-5.1-chat"
     plugins: true
     summarize: true
-    summaryModel: "gpt-4.1"
+    summaryModel: "gpt-5.1-chat"
     titleConvo: true
     titleMethod: "completion"
 
@@ -51,7 +51,7 @@ endpoints:
         version: "${AZURE_OPENAI_API_VERSION}"
 
         models:
-          gpt-5.1-chat:
+          gpt-5.1-codex:
             deploymentName: "${AZURE_GPT51_CODEX_DEPLOYMENT}"
 
       # ---- Gruppe E: hause-min5ar24-swedencentral (gpt-5.1) ----
@@ -61,13 +61,13 @@ endpoints:
         version: "${AZURE_OPENAI_API_VERSION}"
 
         models:
-          gpt-5.1-chat:
+          gpt-5.1:
             deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
 
 
 modelSpecs:
-  enforce: false          # true = nur diese Modelle erlauben
-  prioritize: true        # erstes Modell in der Liste = Default in der UI
+  enforce: false
+  prioritize: true
   list:
     - name: "gpt-5.1-chat"
       label: "GPT-5.1 Chat"
@@ -77,14 +77,14 @@ modelSpecs:
         modelLabel: "GPT-5.1 Chat"
 
     - name: "gpt-5.1"
-      label: "GPT-5.1 (Raw)"
+      label: "GPT-5.1"
       preset:
         endpoint: "azureOpenAI"
         model: "gpt-5.1"
         modelLabel: "GPT-5.1"
 
     - name: "gpt-5.1-codex"
-      label: "GPT-5.1 Codex (Code)"
+      label: "GPT-5.1 Codex"
       preset:
         endpoint: "azureOpenAI"
         model: "gpt-5.1-codex"
