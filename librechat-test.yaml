@@ -3,7 +3,7 @@ cache: true
 
 interface:
   modelSelect: false
-  endpointsMenu: false
+  endpointsMenu: true
   parameters: true
   sidePanel: true
   presets: true
