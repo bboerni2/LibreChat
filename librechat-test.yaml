@@ -1,10 +1,32 @@
 version: "1.2.8"
 cache: true
 
-agents:
-  enabled: true
+interface:
+  modelSelect: true        # Modelle im Dropdown sichtbar
+  parameters: true
+  sidePanel: true
+  presets: true
+  prompts: true
+  bookmarks: true
+  multiConvo: true
+  agents: true
+  customWelcome: "Hey {{user.name}}! ⚠️ Dies ist die TEST-Instanz von LibreChat."
+  runCode: true
+  webSearch: true
+  fileSearch: true
+  fileCitations: true
 
 endpoints:
+
+  agents:
+    recursionLimit: 50
+    maxRecursionLimit: 100
+    disableBuilder: false
+    capabilities: ["execute_code", "file_search", "actions", "tools"]
+    allowedProviders:
+      - azureOpenAI
+
+
   #############################################
   # Azure OpenAI – balchat (gpt-4.1) + GPT-5
   #############################################
