@@ -34,4 +34,13 @@ endpoints:
           gpt-4o:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT4o}"
 
+      # ---- Gruppe C: hause-min5ar24-swedencentral (gpt-5.1-chat) ----
+      - group: "hause-min5ar24-swedencentral-chat"
+        apiKey: "${AZURE_GPT51_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
+
+        models:
+          gpt-5.1-chat:
+            deploymentName: "${AZURE_GPT51_CHAT_DEPLOYMENT}"
 
