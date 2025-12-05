@@ -2,7 +2,8 @@ version: "1.2.8"
 cache: true
 
 interface:
-  modelSelect: false        # Modelle im Dropdown sichtbar
+  modelSelect: true        # Modelle im Dropdown sichtbar
+  endpointsMenu: false
   parameters: true
   sidePanel: true
   presets: true
