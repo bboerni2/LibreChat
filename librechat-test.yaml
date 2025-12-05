@@ -44,3 +44,62 @@ endpoints:
           gpt-5.1-chat:
             deploymentName: "${AZURE_GPT51_CHAT_DEPLOYMENT}"
 
+      # ---- Gruppe D: hause-min5ar24-swedencentral (gpt-5.1-codex) ----
+      - group: "hause-min5ar24-swedencentral-codex"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
+
+        models:
+          gpt-5.1-chat:
+            deploymentName: "${AZURE_GPT51_CODEX_DEPLOYMENT}"
+
+      # ---- Gruppe E: hause-min5ar24-swedencentral (gpt-5.1) ----
+      - group: "hause-min5ar24-swedencentralt"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
+
+        models:
+          gpt-5.1-chat:
+            deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
+
+
+modelSpecs:
+  enforce: false          # true = nur diese Modelle erlauben
+  prioritize: true        # erstes Modell in der Liste = Default in der UI
+  list:
+    - name: "gpt-5.1-chat"
+      label: "GPT-5.1 Chat"
+      preset:
+        endpoint: "azureOpenAI"
+        model: "gpt-5.1-chat"
+        modelLabel: "GPT-5.1 Chat"
+
+    - name: "gpt-5.1"
+      label: "GPT-5.1 (Raw)"
+      preset:
+        endpoint: "azureOpenAI"
+        model: "gpt-5.1"
+        modelLabel: "GPT-5.1"
+
+    - name: "gpt-5.1-codex"
+      label: "GPT-5.1 Codex (Code)"
+      preset:
+        endpoint: "azureOpenAI"
+        model: "gpt-5.1-codex"
+        modelLabel: "GPT-5.1 Codex"
+
+    - name: "gpt-4.1"
+      label: "GPT-4.1"
+      preset:
+        endpoint: "azureOpenAI"
+        model: "gpt-4.1"
+        modelLabel: "GPT-4.1"
+
+    - name: "gpt-4o"
+      label: "GPT-4o"
+      preset:
+        endpoint: "azureOpenAI"
+        model: "gpt-4o"
+        modelLabel: "GPT-4o"
