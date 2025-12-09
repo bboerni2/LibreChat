@@ -15,6 +15,7 @@ interface:
   webSearch: true
   fileSearch: true
   fileCitations: true
+  stream: true
 
 endpoints:
 
