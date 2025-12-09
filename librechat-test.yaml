@@ -31,6 +31,7 @@ endpoints:
   # Azure OpenAI – balchat (gpt-4.1) + GPT-5
   #############################################
   azureOpenAI:
+    streamRate: 50
     titleModel: "gpt-5.1-chat"
     plugins: true
     summarize: true
