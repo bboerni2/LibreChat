@@ -9,7 +9,7 @@ interface:
 #  prompts: true
 #  bookmarks: true
 #  multiConvo: true
-  agents: true
+#  agents: true
   customWelcome: "Hey {{user.name}}! ⚠️ Dies ist die TEST-Instanz von LibreChat."
 #  runCode: true
 #  webSearch: true
@@ -91,8 +91,8 @@ endpoints:
 
 
 modelSpecs:
-  enforce: false         # ihr wollt ja noch andere Modelle nutzen können
-  prioritize: true       # dieses Spec wird im UI bevorzugt
+#  enforce: false         # ihr wollt ja noch andere Modelle nutzen können
+#  prioritize: true       # dieses Spec wird im UI bevorzugt
   list:
     - name: "office-default-5.1-chat"
       label: "GPT-5.1-chat (Office Default)"
