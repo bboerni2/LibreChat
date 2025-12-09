@@ -92,7 +92,6 @@ endpoints:
 modelSpecs:
   enforce: false
   prioritize: true
-  # Damit du zusätzlich weiterhin die "rohen" Azure-Modelle siehst:
   addedEndpoints:
     - azureOpenAI
 
@@ -109,7 +108,7 @@ modelSpecs:
         modelLabel: "GPT-5.1-chat (Office Default)"
         maxContextTokens: 128000
         max_tokens: 4096
-        temperature: 0.4
+        # temperature: 0.4               #  Anpassung der Kreativität wird von Azure OpenAI nicht unterstützt
 
         # Hier passiert die eigentliche "Glättung"
         promptPrefix: |
@@ -119,6 +118,11 @@ modelSpecs:
           ZIELE:
           - Gib strukturierte, nüchterne Antworten, nicht übertrieben geschwätzig.
           - Formatiere wichtige Inhalte mit Markdown (Überschriften, Listen, Codeblöcke).
+          - Halte deine Antworten kurz und nüchtern.
+          - Nutze keine kreativen Ausschmückungen.
+          - Verzichte auf Spekulationen; kennzeichne Unsicherheit explizit.
+          - Nutze eine klare Markdown-Struktur.
+
           - Bei Code:
             - immer vollständige, lauffähige Beispiele.
             - klar getrennt: Codeblock und kurze Erklärung darunter.
