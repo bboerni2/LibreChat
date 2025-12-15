@@ -27,6 +27,20 @@ endpoints:
     allowedProviders:
       - azureOpenAI
 
+  custom:
+    - name: "LocalAI"
+      apiKey: "${LOCALAI_API_KEY}"
+      baseURL: "${LOCALAI_BASE_URL}"
+      models:
+        default:
+          - "${LOCALAI_DEFAULT_MODEL}"
+        fetch: true
+      titleConvo: true
+      titleMethod: completion
+      summarize: false
+      plugins: false
+      streamRate: 50
+
 
   #############################################
   # Azure OpenAI – balchat (gpt-4.1) + GPT-5
