@@ -110,6 +110,7 @@ modelSpecs:
   prioritize: true
   addedEndpoints:
     - azureOpenAI
+    - custom
 
   list:
     - name: "Balmung-default-5.1-chat"
