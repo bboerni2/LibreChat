@@ -91,6 +91,7 @@ modelSpecs:
         endpoint: "azureOpenAI"
         model: "gpt-5.1-codex"
         modelLabel: "GPT-5.1 Codex"
+        useResponsesApi: true
 
     # ---- GPT-4o ----
     - name: "gpt-4o"
