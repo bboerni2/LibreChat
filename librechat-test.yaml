@@ -112,7 +112,7 @@ modelSpecs:
       label: "LocalAI"
       description: "Lokales Modell (schnell, intern)"
       default: false
-      group: "custom"
+      group: "azureOpenAI"
       preset:
         endpoint: "custom"
         model: "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
