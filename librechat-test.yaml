@@ -12,3 +12,21 @@ endpoints:
         available:
           - "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
         fetch: false
+
+modelSpecs:
+  enforce: false
+  prioritize: true
+  addedEndpoints:
+    - custom
+
+  list:
+    - name: "balmung-localai"
+      label: "Balmung LocalAI"
+      description: "Lokales Modell (intern)"
+      default: true
+      group: "LocalAI"
+      preset:
+        endpoint: "custom"
+        model: "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
+        modelLabel: "Balmung LocalAI"
+        max_tokens: 1024
