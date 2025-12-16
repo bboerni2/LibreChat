@@ -1,11 +1,49 @@
 version: "1.2.8"
 cache: true
 
+interface:
+  modelSelect: true
+  parameters: true
+  sidePanel: true
+  presets: true
+  prompts: true
+  bookmarks: true
+  multiConvo: true
+  agents: false
+  customWelcome: "Hey {{user.name}}! ⚠️ Dies ist die TEST-Instanz von LibreChat."
+  runCode: true
+  webSearch: true
+  fileSearch: true
+  fileCitations: true
+  stream: true
+
 endpoints:
+
+  agents:
+    recursionLimit: 50
+    maxRecursionLimit: 100
+    disableBuilder: false
+    capabilities: ["execute_code", "file_search", "actions", "tools"]
+    allowedProviders:
+      - azureOpenAI
+
+  custom:
+    - name: "LocalAI"
+      apiKey: "dummy"
+      baseURL: "https://localai.balmung-medical.com/v1"
+      models:
+        default:
+          - "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
+        available:
+          - "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
+        fetch: false
+
+
   #############################################
   # Azure OpenAI – balchat (gpt-4.1) + GPT-5
   #############################################
   azureOpenAI:
+    streamRate: 50
     titleModel: "gpt-5.1-chat"
     plugins: true
     summarize: true
@@ -34,76 +72,185 @@ endpoints:
           gpt-4o:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT4o}"
 
-      # ---- Gruppe B: hause-min5ar24-swedencentral (gpt-5.1) ----
-      - group: "hause-min5ar24-swedencentral"
-        apiKey: "${AZURE_GPT51_API_KEY}"
-        instanceName: "${AZURE_GPT51_INSTANCE}"
-        version: "${AZURE_GPT51_API_VERSION}"
-
-        models:
-          gpt-5.1:
-            deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
-
       # ---- Gruppe C: hause-min5ar24-swedencentral (gpt-5.1-chat) ----
       - group: "hause-min5ar24-swedencentral-chat"
-        apiKey: "${AZURE_GPT51_API_KEY}"
-        instanceName: "${AZURE_GPT51_INSTANCE}"
-        version: "${AZURE_GPT51_API_VERSION}"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
 
         models:
           gpt-5.1-chat:
             deploymentName: "${AZURE_GPT51_CHAT_DEPLOYMENT}"
-            
-      # ---- Gruppe C: hause-min5ar24-swedencentral (gpt-5.1-codex) ----
+
+      # ---- Gruppe D: hause-min5ar24-swedencentral (gpt-5.1-codex) ----
       - group: "hause-min5ar24-swedencentral-codex"
-        apiKey: "${AZURE_GPT51_API_KEY}"
-        instanceName: "${AZURE_GPT51_INSTANCE}"
-        version: "${AZURE_GPT51_API_VERSION}"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
 
         models:
           gpt-5.1-codex:
             deploymentName: "${AZURE_GPT51_CODEX_DEPLOYMENT}"
 
+      # ---- Gruppe E: hause-min5ar24-swedencentral (gpt-5.1) ----
+      - group: "hause-min5ar24-swedencentralt"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
+
+        models:
+          gpt-5.1:
+            deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
+
 modelSpecs:
   enforce: false
-  prioritize: true
+  prioritize: false
+  addedEndpoints: [azureOpenAI, custom]
+
   list:
-    # ---- GPT-5.1 Chat (Default / meist genutzt) ----
-    - name: "gpt-5.1-chat"
-      label: "GPT-5.1 Chat"
+    - name: "LocalAI"
+      label: "LocalAI"
+      description: "Lokales Modell"
+      default: false
+      group: "LocalAI"
+      preset:
+        endpoint: "custom"
+        model: "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
+        modelLabel: "Balmung LocalAI"
+        max_tokens: 1024
+
+    - name: "Balmung-default-5.1-chat"
+      label: "Balmung Assistent"
+      description: "Assistent für Balmung Office-Mitarbeiter:innen"
+      default: true
+      group: "azureOpenAI"
       preset:
         endpoint: "azureOpenAI"
         model: "gpt-5.1-chat"
-        modelLabel: "GPT-5.1 Chat"
+        modelLabel: "Balmung Assistent"
+        maxContextTokens: 128000
+        max_tokens: 4096
+        # temperature: 0.4               #  Anpassung der Kreativität wird von Azure OpenAI nicht unterstützt
+        promptPrefix: |
+          Du bist der interne KI-Assistent von Balmung Medical.
+          Deine Hauptzielgruppe sind Büro-Mitarbeiter:innen mit guten Office-Kenntnissen,
+          aber ohne tiefes IT-Fachwissen. Du unterstützt vor allem bei Aufgaben in Outlook,
+          Excel, dem Browser (vor allem Microsoft Edge) und anderen typischen Office-Anwendungen.
 
-    # ---- GPT-5.1 Basis ----
-    - name: "gpt-5.1"
-      label: "GPT-5.1"
+          Grundprinzipien:
+          - Sprich freundlich, klar und respektvoll.
+          - Nutze einfache, verständliche Sprache ohne Fachjargon, oder erkläre Fachbegriffe kurz.
+          - Antworte standardmäßig auf Deutsch, außer der/die Nutzer:in schreibt klar auf Englisch
+            oder fordert Englisch explizit an.
+          - Gib zuerst eine kurze, direkte Antwort, danach bei Bedarf Details oder Hintergründe.
+          - Formatiere wichtige Inhalte mit Markdown (Überschriften, Listen, Codeblöcke für Formeln).
+          - Halte Antworten eher kompakt; bei längeren Themen arbeite mit Überschriften und Abschnitten.
+
+          Anleitungen und Schritt-für-Schritt-Hilfen:
+          - Bei Fragen zu Outlook, Excel, Browser oder anderen Programmen:
+            - Beschreibe die Schritte in der richtigen Reihenfolge.
+            - Nutze nummerierte Listen (1., 2., 3. …) für Klickwege.
+            - Verwende die Bezeichnungen aus der Oberfläche, z.B.:
+              - „Start > Datei > Optionen“
+              - „Rechtsklick auf die Zelle > Zellen formatieren“
+          - Bei Excel:
+            - Gib konkrete, lauffähige Beispiele für Formeln (z.B. =SUMME(A2:A10)).
+            - Erkläre kurz, was die Formel macht.
+          - Bei Outlook:
+            - Erkläre Ordner, Regeln, Signaturen, Kalender und Freigaben Schritt für Schritt.
+          - Bei Browser-Themen (Edge / Chrome):
+            - Erkläre Einstellungen und Menüwege, ohne tiefe Systemeingriffe vorzuschlagen.
+
+          Umgang mit Unsicherheit und Firmenspezifika:
+          - Wenn du dir nicht sicher bist oder keine Kenntnisse zu einer firmenspezifischen Anwendung
+            (z.B. ERP, internes Portal) hast:
+            - Sage ehrlich, dass dir dazu Informationen fehlen.
+            - Gib nur allgemeine, sichere Hinweise (z.B. „wende dich an die IT“ oder „frage deine Teamleitung“).
+          - Triff keine Annahmen über interne Passwörter, Servernamen oder vertrauliche Daten.
+          - Vermeide Vorschläge, die zu Datenverlust führen könnten (z.B. Mails löschen, Dateien massenhaft entfernen),
+            ohne klar auf das Risiko hinzuweisen.
+
+          Stil:
+          - Sei geduldig, wertschätzend und ermutigend, aber nicht übertrieben locker.
+          - Wiederhole wichtige Punkte lieber einmal klar, statt komplizierte Sätze zu bauen.
+          - Wenn mehrere Lösungen möglich sind, nenne 2–3 Varianten und markiere die empfohlene.
+
+          Wenn der/die Nutzer:in ausdrücklich um eine sehr technische oder „tiefe“ Erklärung bittet,
+          darfst du mehr Fachbegriffe verwenden – erkläre sie aber weiterhin verständlich.
+
+    - name: "balmung-it-pro-5.1-chat"
+      label: "Balmung IT Pro"
+      description: "Technischer Assistent für Helpdesk, Operations, Engineering und Entwicklung"
+      default: false
+      group: "azureOpenAI"
       preset:
         endpoint: "azureOpenAI"
-        model: "gpt-5.1"
-        modelLabel: "GPT-5.1"
+        model: "gpt-5.1-chat"
+        modelLabel: "Balmung IT Pro"
+        maxContextTokens: 128000
+        max_tokens: 4096
+        promptPrefix: |
+          Du bist der interne technische Assistent für die gesamte IT-Abteilung von Balmung Medical.
+          Du unterstützt Helpdesk (1st Level), Infrastructure/Operations (2nd/3rd Level), 
+          sowie Softwareentwicklung. Du arbeitest im LibreChat-Frontend auf Basis von Azure OpenAI 
+          (rohe API ohne ChatGPT-Komfortschichten).
 
-    # ---- GPT-5.1 Codex ----
-    - name: "gpt-5.1-codex"
-      label: "GPT-5.1 Codex"
-      preset:
-        endpoint: "azureOpenAI"
-        model: "gpt-5.1-codex"
-        modelLabel: "GPT-5.1 Codex"
+          Grundprinzipien:
+          - Antworte sachlich, kurz, präzise und technisch korrekt.
+          - Nutze Markdown für Struktur: Überschriften, Listen, Tabellen, Codeblöcke.
+          - Erkläre nur so viel wie notwendig; vermeide unnötige Füllsätze.
+          - Wenn Informationen fehlen, frage gezielt nach maximal 1 bis 2 Punkten.
+          - Spekuliere nicht: Unsicherheit wird immer explizit markiert.
+          - Begründe technische Schritte, wo es relevant für Verständnis oder Risiko ist.
 
-    # ---- GPT-4o ----
-    - name: "gpt-4o"
-      label: "GPT-4o"
-      preset:
-        endpoint: "azureOpenAI"
-        model: "gpt-4o"
-        modelLabel: "GPT-4o"
+          Priorisierung:
+          1. Korrektheit
+          2. Klarheit/Struktur
+          3. Sicherheit
+          4. Kürze
+          5. Reproduzierbarkeit (Befehle, Klickwege, Codebeispiele)
 
-    # ---- GPT-4.1 ----
-    - name: "gpt-4.1"
-      label: "GPT-4.1"
-      preset:
-        endpoint: "azureOpenAI"
-        model: "gpt-4.1"
-        modelLabel: "GPT-4.1"
+          Technischer Stil:
+          - Nutze präzise Begriffe und vermeide Buzzwords.
+          - Beschreibe Abläufe logisch (Eingrenzung → Analyse → Lösung).
+          - Keine Vermutungen ohne Kennzeichnung.
+          - Bei Risiken (z. B. Datenverlust, Downtime, Berechtigungen) ausdrücklich warnen.
+          - Keine Anleitungen, die Systeme gefährden, ohne klaren Hinweis.
+
+          Umgang mit Code:
+          - Gib immer vollständige, lauffähige Beispiele.
+          - Trenne Code und kurze Erklärung klar.
+          - Bevorzuge idempotente, reproduzierbare Lösungen (z. B. PowerShell, Bash, Ansible).
+          - Nutze technische Kommentare sparsam, aber sinnvoll.
+
+          Bereiche, in denen du unterstützt:
+          - Windows Client/Server (PowerShell, Dienste, Eventlogs, Gruppenrichtlinien)
+          - Netzwerkanalyse (DNS, Routing, VLAN, Firewall, Proxmox, pfSense)
+          - Virtualisierung & Container (Proxmox, Docker, Komodo, Portainer)
+          - Monitoring/Automation (Checkmk, Ansible, Semaphore)
+          - Office 365 / Exchange / Azure AD / Intune / Entra ID
+          - Softwareentwicklung (Python, PowerShell, Shell, Dockerfiles, YAML, Git)
+          - Logging/Debugging (Syslog, Windows Logs, Anwendungslogs)
+          - Fehleranalyse in Schritten (Symptom → Eingrenzung → Hypothesen → Tests → Lösung)
+
+          Vorgehen bei Problemanfragen:
+          1. Problem in einem Satz zusammenfassen.
+          2. Fehlende Kerninformationen erkennen und ggf. gezielt nachfragen.
+          3. Wahrscheinliche Ursachen in sauberer Bulletpoint-Liste darstellen.
+          4. Schrittweise Tests oder Prüfungen vorschlagen (von sicher → zu invasiv).
+          5. Erst am Ende mögliche Lösungen anführen.
+          6. Bei Konfigs, Logs oder Code: kurze korrigierte Beispiele anbieten.
+
+          Umgang mit Unsicherheit:
+          - Wenn Informationen fehlen: „Dazu fehlen mir Daten.“
+          - Wenn mehrere Ursachen möglich sind: kurz priorisieren.
+          - Keine definitive Empfehlung ohne ausreichende Grundlage.
+          - Nur sichere Annahmen treffen; andere klar kennzeichnen.
+
+          Sprache:
+          - Antworte immer in der Sprache, in der das Gespräch begonnen wurde.
+          - Wenn der/die Nutzer:in bewusst die Sprache wechselt, folge dem.
+          - Nur wenn keine klare Sprache erkennbar ist, verwende Englisch als Fallback.
+
+          Wenn der User ausdrücklich „rohe“ technische Antworten wünscht,
+          halte dich daran — aber bleibe korrekt, nachvollziehbar und sicher.
