@@ -29,11 +29,11 @@ endpoints:
 
   custom:
     - name: "LocalAI"
-      apiKey: "${LOCALAI_API_KEY}"
-      baseURL: "${LOCALAI_BASE_URL}"
+      apiKey: "dummy"
+      baseURL: "https://localai.balmung-medical.com/v1"
       models:
         default:
-          - "${LOCALAI_DEFAULT_MODEL}"
+          - "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
         fetch: true
       titleConvo: true
       titleMethod: "completion"
@@ -120,7 +120,7 @@ modelSpecs:
       group: "custom"
       preset:
         endpoint: "custom"
-        model: "${LOCALAI_DEFAULT_MODEL}" 
+        model: "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo" 
         modelLabel: LocalAI
         max_tokens: 50000
         maxContextTokens: 250000
