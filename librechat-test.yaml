@@ -34,12 +34,9 @@ endpoints:
       models:
         default:
           - "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
+        available:
+          - "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
         fetch: false
-      titleConvo: true
-      titleMethod: "completion"
-      summarize: false
-      plugins: false
-      streamRate: 50
 
 
   #############################################
@@ -111,8 +108,8 @@ modelSpecs:
   addedEndpoints: [azureOpenAI, custom]
 
   list:
-    - name: "LocalAI-Chat"
-      label: "Balmung LocalAI"
+    - name: "LocalAI"
+      label: "LocalAI"
       description: "Lokales Modell (schnell, intern)"
       default: false
       group: "custom"
