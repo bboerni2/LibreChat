@@ -26,6 +26,7 @@ endpoints:
     capabilities: ["execute_code", "file_search", "actions", "tools"]
     allowedProviders:
       - azureOpenAI
+      - custom
 
   custom:
     - name: "LocalAI"
