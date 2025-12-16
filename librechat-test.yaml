@@ -2,31 +2,30 @@ version: "1.2.8"
 cache: true
 
 interface:
-  modelSelect: true
-  parameters: true
-  sidePanel: true
-  presets: true
-  prompts: true
-  bookmarks: true
-  multiConvo: true
-  agents: false
+#  modelSelect: true
+#  parameters: true
+#  sidePanel: true
+#  presets: true
+#  prompts: true
+#  bookmarks: true
+#  multiConvo: true
+#  agents: false
   customWelcome: "Hey {{user.name}}! ⚠️ Dies ist die TEST-Instanz von LibreChat."
-  runCode: true
-  webSearch: true
-  fileSearch: true
-  fileCitations: true
-  stream: true
+#  runCode: true
+#  webSearch: true
+#  fileSearch: true
+#  fileCitations: true
+#  stream: true
 
 endpoints:
 
-#  agents:
-#    recursionLimit: 50
-#    maxRecursionLimit: 100
-#    disableBuilder: false
-#    capabilities: ["execute_code", "file_search", "actions", "tools"]
-#    allowedProviders:
-#      - azureOpenAI
-#      - custom
+  agents:
+    recursionLimit: 50
+    maxRecursionLimit: 100
+    disableBuilder: false
+    capabilities: ["execute_code", "file_search", "actions", "tools"]
+    allowedProviders:
+      - azureOpenAI
 
   custom:
     - name: "LocalAI"
