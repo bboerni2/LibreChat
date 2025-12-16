@@ -117,7 +117,7 @@ modelSpecs:
       label: LocalAI
       description: LocalAI (OpenAI-compatible)
       default: false
-      group: custom
+      group: "azureOpenAI"
       preset:
         endpoint: custom
         model: "${LOCALAI_DEFAULT_MODEL}" 
