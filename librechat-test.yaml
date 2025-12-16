@@ -9,35 +9,153 @@ interface:
   prompts: true
   bookmarks: true
   multiConvo: true
-  agents: false
+  agents: true
   customWelcome: "Hey {{user.name}}! ⚠️ Dies ist die TEST-Instanz von LibreChat."
   runCode: true
+  webSearch: true
+  fileSearch: true
+  fileCitations: true
   stream: true
 
+# ---------------------------
+# Agents = PromptPrefix für LocalAI (custom)
+# ---------------------------
+agents:
+  recursionLimit: 50
+  maxRecursionLimit: 100
+  disableBuilder: false
+  capabilities: ["execute_code", "file_search", "actions", "tools"]
+  allowedProviders:
+    - azureOpenAI
+    - custom
+
+  # Zwei kuratierte LocalAI-"Buttons"
+  presets:
+    - name: "Balmung LocalAI – Office"
+      description: "LocalAI für Office/Anwenderfragen"
+      endpoint: "custom"
+      model: "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
+      max_tokens: 1024
+      promptPrefix: |
+        Du bist der interne KI-Assistent von Balmung Medical.
+        Zielgruppe: Office-Mitarbeiter:innen (Outlook, Excel, Browser).
+        Antworte klar, kurz, auf Deutsch. Erkläre Fachbegriffe kurz.
+
+    - name: "Balmung LocalAI – IT Pro"
+      description: "LocalAI für Helpdesk/Operations/Engineering"
+      endpoint: "custom"
+      model: "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
+      max_tokens: 1024
+      promptPrefix: |
+        Du bist der technische IT-Assistent von Balmung Medical.
+        Antworte präzise, strukturiert, technisch korrekt.
+        Fokus: Infrastruktur, Docker, Proxmox, Logs, Debugging.
+        Wenn Infos fehlen: maximal 1–2 gezielte Rückfragen.
+
+# ---------------------------
+# Endpoints
+# ---------------------------
 endpoints:
+  # LocalAI als custom OpenAI-compatible endpoint (kuratiert)
   custom:
     - name: "LocalAI"
-      baseURL: "https://localai.balmung-medical.com/v1"
       apiKey: "dummy"
+      baseURL: "https://localai.balmung-medical.com/v1"
       models:
         default:
           - "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
+        available:
+          - "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
         fetch: false
 
+  # Azure OpenAI wie gehabt (deine Deployments/Groups)
+  azureOpenAI:
+    streamRate: 50
+    titleModel: "gpt-5.1-chat"
+    plugins: true
+    summarize: true
+    summaryModel: "gpt-5.1-chat"
+    titleConvo: true
+    titleMethod: "completion"
+
+    groups:
+      - group: "balchat"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
+        models:
+          gpt-4.1:
+            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT41}"
+
+      - group: "balchat2"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
+        models:
+          gpt-4o:
+            deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT4o}"
+
+      - group: "hause-min5ar24-swedencentral-chat"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
+        models:
+          gpt-5.1-chat:
+            deploymentName: "${AZURE_GPT51_CHAT_DEPLOYMENT}"
+
+      - group: "hause-min5ar24-swedencentral-codex"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
+        models:
+          gpt-5.1-codex:
+            deploymentName: "${AZURE_GPT51_CODEX_DEPLOYMENT}"
+
+      - group: "hause-min5ar24-swedencentralt"
+        apiKey: "${AZURE_OPENAI_API_KEY}"
+        instanceName: "${AZURE_OPENAI_INSTANCE}"
+        version: "${AZURE_OPENAI_API_VERSION}"
+        models:
+          gpt-5.1:
+            deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
+
+# ---------------------------
+# ModelSpecs NUR für Azure (custom NICHT anfassen)
+# ---------------------------
 modelSpecs:
   enforce: false
   prioritize: true
   addedEndpoints:
-    - custom
+    - azureOpenAI
 
   list:
-    - name: "balmung-localai"
-      label: "Balmung LocalAI"
-      description: "LocalAI (intern)"
+    - name: "Balmung-default-5.1-chat"
+      label: "Balmung Assistent"
+      description: "Assistent für Balmung Office-Mitarbeiter:innen"
       default: true
-      group: "LocalAI"
+      group: "azureOpenAI"
       preset:
-        endpoint: "custom"
-        model: "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
-        modelLabel: "Balmung LocalAI"
-        max_tokens: 1024
+        endpoint: "azureOpenAI"
+        model: "gpt-5.1-chat"
+        modelLabel: "Balmung Assistent"
+        maxContextTokens: 128000
+        max_tokens: 4096
+        promptPrefix: |
+          Du bist der interne KI-Assistent von Balmung Medical.
+          Fokus: Outlook, Excel, Browser, Office-Workflows.
+          Antworte klar, freundlich, auf Deutsch.
+
+    - name: "balmung-it-pro-5.1-chat"
+      label: "Balmung IT Pro"
+      description: "Technischer Assistent für Helpdesk, Operations, Engineering und Entwicklung"
+      default: false
+      group: "azureOpenAI"
+      preset:
+        endpoint: "azureOpenAI"
+        model: "gpt-5.1-chat"
+        modelLabel: "Balmung IT Pro"
+        maxContextTokens: 128000
+        max_tokens: 4096
+        promptPrefix: |
+          Du bist der technische IT-Assistent für Balmung Medical.
+          Antworte kurz, präzise, technisch korrekt. Nutze Markdown.
