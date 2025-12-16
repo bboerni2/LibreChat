@@ -113,17 +113,16 @@ modelSpecs:
     - custom
 
   list:
-    - name: localai-default
+    - name: localai
       label: LocalAI
-      description: LocalAI (OpenAI-compatible)
+      description: LocalAI
       default: false
-      group: "custom"
+      group: custom
       preset:
-        endpoint: "custom"
-        model: "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo" 
+        endpoint: custom
         modelLabel: LocalAI
-        max_tokens: 50000
-        maxContextTokens: 250000
+        models:
+          - fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo
 
     - name: "Balmung-default-5.1-chat"
       label: "Balmung Assistent"
