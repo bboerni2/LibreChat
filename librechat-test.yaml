@@ -19,14 +19,14 @@ interface:
 
 endpoints:
 
-  agents:
-    recursionLimit: 50
-    maxRecursionLimit: 100
-    disableBuilder: false
-    capabilities: ["execute_code", "file_search", "actions", "tools"]
-    allowedProviders:
-      - azureOpenAI
-      - custom
+#  agents:
+#    recursionLimit: 50
+#    maxRecursionLimit: 100
+#    disableBuilder: false
+#    capabilities: ["execute_code", "file_search", "actions", "tools"]
+#    allowedProviders:
+#      - azureOpenAI
+#      - custom
 
   custom:
     - name: "LocalAI"
