@@ -107,7 +107,7 @@ endpoints:
 
 modelSpecs:
   enforce: false
-  prioritize: true
+  prioritize: false
   addedEndpoints:
     - azureOpenAI
     - custom
