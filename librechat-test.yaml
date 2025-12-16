@@ -1,21 +1,21 @@
 version: "1.2.8"
 cache: true
 
-#interface:
-#  modelSelect: true
-#  parameters: true
-#  sidePanel: true
-#  presets: true
-#  prompts: true
-#  bookmarks: true
-#  multiConvo: true
-#  agents: false
-#  customWelcome: "Hey {{user.name}}! ⚠️ Dies ist die TEST-Instanz von LibreChat."
-#  runCode: true
-#  webSearch: true
-#  fileSearch: true
-#  fileCitations: true
-#  stream: true
+interface:
+  modelSelect: true
+  parameters: true
+  sidePanel: true
+  presets: true
+  prompts: true
+  bookmarks: true
+  multiConvo: true
+  agents: false
+  customWelcome: "Hey {{user.name}}! ⚠️ Dies ist die TEST-Instanz von LibreChat."
+  runCode: true
+  webSearch: true
+  fileSearch: true
+  fileCitations: true
+  stream: true
 
 endpoints:
 
@@ -110,9 +110,9 @@ modelSpecs:
   list:
     - name: "LocalAI"
       label: "LocalAI"
-      description: "Lokales Modell (schnell, intern)"
+      description: "Lokales Modell"
       default: false
-      group: "azureOpenAI"
+      group: "LocalAI"
       preset:
         endpoint: "custom"
         model: "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
