@@ -1,15 +1,26 @@
 version: "1.2.8"
 cache: false
 
+interface:
+  modelSelect: true
+  parameters: true
+  sidePanel: true
+  presets: true
+  prompts: true
+  bookmarks: true
+  multiConvo: true
+  agents: false
+  customWelcome: "Hey {{user.name}}! ⚠️ Dies ist die TEST-Instanz von LibreChat."
+  runCode: true
+  stream: true
+
 endpoints:
   custom:
     - name: "LocalAI"
       baseURL: "https://localai.balmung-medical.com/v1"
-      apiKey: "dummy"  # LocalAI ignoriert das meist, LibreChat will trotzdem was sehen
+      apiKey: "dummy"
       models:
         default:
-          - "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
-        available:
           - "fireball-meta-llama-3.2-8b-instruct-agent-003-128k-code-dpo"
         fetch: false
 
@@ -22,7 +33,7 @@ modelSpecs:
   list:
     - name: "balmung-localai"
       label: "Balmung LocalAI"
-      description: "Lokales Modell (intern)"
+      description: "LocalAI (intern)"
       default: true
       group: "LocalAI"
       preset:
