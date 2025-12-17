@@ -69,20 +69,20 @@ modelSpecs:
   prioritize: true
   list:
     # ---- GPT-5.1 Chat (Default / meist genutzt) ----
-    - name: "gpt-5.1-chat"
-      label: "GPT-5.1 Chat"
+    - name: "gpt-5.2-chat"
+      label: "GPT-5.2 Chat"
       preset:
         endpoint: "azureOpenAI"
-        model: "gpt-5.1-chat"
-        modelLabel: "GPT-5.1 Chat"
+        model: "gpt-5.2-chat"
+        modelLabel: "GPT-5.2 Chat"
 
-    # ---- GPT-5.1 Basis ----
-    - name: "gpt-5.1"
-      label: "GPT-5.1"
+    # ---- GPT-5.2 Basis ----
+    - name: "gpt-5.2"
+      label: "GPT-5.2"
       preset:
         endpoint: "azureOpenAI"
-        model: "gpt-5.1"
-        modelLabel: "GPT-5.1"
+        model: "gpt-5.2"
+        modelLabel: "GPT-5.2"
 
     # ---- GPT-5.1 Codex ----
     - name: "gpt-5.1-codex"
