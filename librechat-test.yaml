@@ -18,7 +18,6 @@ interface:
   stream: true
 
 endpoints:
-
   agents:
     recursionLimit: 50
     maxRecursionLimit: 100
@@ -26,6 +25,21 @@ endpoints:
     capabilities: ["execute_code", "file_search", "actions", "tools"]
     allowedProviders:
       - azureOpenAI
+
+    agents:
+      - id: balmungagent-it-pro
+        name: Balmungagent IT Pro
+        description: Internal IT Agent with file access
+        model: gpt-5.1
+        tools:
+          - execute_code
+          - file_search
+        systemPrompt: |
+          You are running inside LibreChat with filesystem access.
+          You MUST execute file-related requests by creating files.
+          Never explain how the user can do it themselves.
+          If a file is requested, create it and return it as a downloadable attachment.
+
 
   #############################################
   # Azure OpenAI – balchat (gpt-4.1) + GPT-5
