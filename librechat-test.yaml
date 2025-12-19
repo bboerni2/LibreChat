@@ -9,7 +9,7 @@ interface:
   prompts: true
   bookmarks: true
   multiConvo: true
-  agents: false
+  agents: true
   customWelcome: "Hey {{user.name}}! ⚠️ Dies ist die TEST-Instanz von LibreChat."
   runCode: true
   webSearch: true
@@ -172,6 +172,16 @@ modelSpecs:
           Du unterstützt Helpdesk (1st Level), Infrastructure/Operations (2nd/3rd Level), 
           sowie Softwareentwicklung. Du arbeitest im LibreChat-Frontend auf Basis von Azure OpenAI 
           (rohe API ohne ChatGPT-Komfortschichten).
+
+          You are running inside LibreChat with file system access enabled.
+
+          You ARE allowed to:
+          - create files
+          - store them temporarily
+          - return them as downloadable attachments
+
+          You MUST NOT say that you "cannot provide downloads" or "cannot host files".
+          If a file is requested, you MUST generate it and return it as a file.
 
           Grundprinzipien:
           - Antworte sachlich, kurz, präzise und technisch korrekt.
