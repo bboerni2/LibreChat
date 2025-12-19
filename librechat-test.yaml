@@ -30,6 +30,7 @@ endpoints:
       - id: balmungagent-it-pro
         name: Balmungagent IT Pro
         description: Internal IT Agent with file access
+        provider: azureOpenAI
         model: gpt-5.1
         tools:
           - execute_code
