@@ -112,6 +112,14 @@ modelSpecs:
 
   list:
 
+    - name: balmung-agent-it-pro
+      label: Balmungagent IT Pro
+      description: Internal IT Agent (execute_code + files)
+      default: false
+      preset:
+        endpoint: agents
+        model: balmungagent-it-pro
+
     - name: "Balmung-default-5.1-chat"
       label: "Balmung Assistent"
       description: "Assistent für Balmung Office-Mitarbeiter:innen"
