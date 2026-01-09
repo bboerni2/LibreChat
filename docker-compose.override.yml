@@ -382,6 +382,7 @@ services:
       ENDPOINTS: ${ENDPOINTS_PLUS}
 
   mongodb:
+    image: mongo:8.2
     volumes:
       - /var/docker/librechat/mongo:/data/db
 
