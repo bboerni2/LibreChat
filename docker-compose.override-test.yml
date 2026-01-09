@@ -196,6 +196,7 @@ services:
       - /var/docker/librechat-test/logs:/app/logs
 
   mongodb:
+    image: mongo:8.2
     volumes:
       - /var/docker/librechat-test/mongo:/data/db
 
