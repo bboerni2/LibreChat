@@ -19,11 +19,33 @@ interface:
 
 fileConfig:
   serverFileSizeLimit: 50
+  fileTokenLimit: 100000
+  ocr:
+    supportedMimeTypes:
+      - "^image/(jpeg|gif|png|webp|heic|heif)$"
+      - "^application/pdf$"
+      - "^application/vnd\\.openxmlformats-officedocument\\.(wordprocessingml\\.document|presentationml\\.presentation|spreadsheetml\\.sheet)$"
+      - "^application/vnd\\.ms-(word|powerpoint|excel)$"
+      - "^application/epub\\+zip$"
+
+  text:
+    supportedMimeTypes:
+      - "^text/(plain|markdown|csv|json|xml|html|css|javascript|typescript|x-yaml)$"
+
   allowedMimeTypes:
     - text/plain
     - text/csv
     - text/markdown
     - application/json
+    - application/xml
+    - text/html
+    - text/css
+    - application/javascript
+    - application/typescript
+    - application/x-yaml
+    - application/epub+zip
+    - text/yaml
+    - application/x-yaml
 
     # PDF
     - application/pdf
