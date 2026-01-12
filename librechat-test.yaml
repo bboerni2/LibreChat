@@ -18,30 +18,29 @@ interface:
   stream: true
 
 fileConfig:
-  serverFileSizeLimit: 50 # MB (Images + Excel brauchen mehr)
+  serverFileSizeLimit: 50
   allowedMimeTypes:
-    # Text
     - text/plain
     - text/csv
+    - text/markdown
+    - application/json
 
-    # Excel
-    - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+    # PDF
+    - application/pdf
+
+    # Office
+    - application/vnd.openxmlformats-officedocument.wordprocessingml.document  # docx
+    - application/vnd.openxmlformats-officedocument.presentationml.presentation # pptx
+    - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet        # xlsx
     - application/vnd.ms-excel
 
-    # Images / Screenshots
+    # Archives (optional)
+    - application/zip
+
+    # Images
     - image/png
     - image/jpeg
     - image/webp
-
-  disallowedExtensions:
-    - exe
-    - dll
-    - js
-    - vbs
-    - ps1
-    - bat
-    - cmd
-    - com
 
 endpoints:
   agents:
