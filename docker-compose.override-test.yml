@@ -18,6 +18,8 @@ services:
       CONSOLE_JSON: ${CONSOLE_JSON}
       NO_INDEX: ${NO_INDEX}
       TRUST_PROXY: ${TRUST_PROXY}
+      ALLOW_FILE_UPLOADS: ${ALLOW_FILE_UPLOADS}
+      FILE_STORAGE_PATH: ${FILE_STORAGE_PATH}
 
       ###########################################################################
       # 🌐 Domains
