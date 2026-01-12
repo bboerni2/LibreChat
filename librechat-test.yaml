@@ -17,6 +17,32 @@ interface:
   fileCitations: true
   stream: true
 
+fileConfig:
+  serverFileSizeLimit: 50 # MB (Images + Excel brauchen mehr)
+  allowedMimeTypes:
+    # Text
+    - text/plain
+    - text/csv
+
+    # Excel
+    - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+    - application/vnd.ms-excel
+
+    # Images / Screenshots
+    - image/png
+    - image/jpeg
+    - image/webp
+
+  disallowedExtensions:
+    - exe
+    - dll
+    - js
+    - vbs
+    - ps1
+    - bat
+    - cmd
+    - com
+
 endpoints:
   agents:
     recursionLimit: 50

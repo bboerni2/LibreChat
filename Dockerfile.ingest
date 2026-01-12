@@ -1,0 +1,41 @@
+# ingest/Dockerfile
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app
+
+# System deps:
+# - tesseract OCR + language packs (DE/EN)
+# - libjpeg/zlib for Pillow
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      tesseract-ocr \
+      tesseract-ocr-eng \
+      tesseract-ocr-deu \
+      libjpeg62-turbo \
+      zlib1g \
+    && rm -rf /var/lib/apt/lists/*
+
+# Python deps:
+# - requests: LocalAI calls
+# - psycopg[binary]: Postgres/pgvector
+# - pillow + pytesseract: image OCR
+# - openpyxl + pandas: Excel ingestion
+RUN pip install --no-cache-dir \
+      requests \
+      "psycopg[binary]" \
+      pillow \
+      pytesseract \
+      openpyxl \
+      pandas
+
+# Non-root user (safer by default)
+RUN useradd -u 10001 -m -s /usr/sbin/nologin ingest && \
+    chown -R ingest:ingest /app
+USER ingest
+
+COPY --chown=ingest:ingest worker.py /app/worker.py
+
+CMD ["python", "/app/worker.py"]
