@@ -47,7 +47,7 @@ endpoints:
     recursionLimit: 50
     maxRecursionLimit: 100
     disableBuilder: false
-    capabilities: ["file_search", "actions", "tools"]
+    capabilities: ["file_search", "actions", "tools", "context", "ocr"]
     allowedProviders: [azureOpenAI]
 
     agents:
