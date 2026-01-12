@@ -208,27 +208,3 @@ services:
     volumes:
       - /var/docker/librechat-test/pgdata2:/var/lib/postgresql/data
 
-  ingest:
-    build:
-      context: ./ingest
-      dockerfile: Dockerfile.ingest
-    restart: unless-stopped
-    environment:
-      WATCH_DIR: /uploads
-      STATE_DIR: /state
-      POLL_SECONDS: "5"
-
-      # LocalAI (OpenAI-kompatibel) – wird bei euch eh als Variable geführt
-      LOCALAI_BASE_URL: ${LOCALAI_BASE_URL}
-      EMBEDDING_MODEL: ${LOCALAI_EMBEDDING_MODEL}
-
-      # pgvector (läuft bei euch als "vectordb")
-      PG_DSN: ${INGEST_PG_DSN}
-      COLLECTION: librechat_test_uploads
-
-    volumes:
-      - /var/docker/librechat-test/uploads:/uploads:ro
-      - /var/docker/librechat-test/ingest-state:/state
-
-    depends_on:
-      - vectordb
