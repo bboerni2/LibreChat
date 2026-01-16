@@ -6,10 +6,10 @@ endpoints:
   # Azure OpenAI – balchat (gpt-4.1) + GPT-5
   #############################################
   azureOpenAI:
-    titleModel: "gpt-5.1-chat"
+    titleModel: "gpt-5.2-chat"
     plugins: true
     summarize: true
-    summaryModel: "gpt-5.1-chat"
+    summaryModel: "gpt-5.2-chat"
     titleConvo: true
     titleMethod: "completion"
 
@@ -34,24 +34,24 @@ endpoints:
           gpt-4o:
             deploymentName: "${AZURE_OPENAI_DEPLOYMENT_GPT4o}"
 
-      # ---- Gruppe B: hause-min5ar24-swedencentral (gpt-5.1) ----
+      # ---- Gruppe B: hause-min5ar24-swedencentral (gpt-5.2) ----
       - group: "hause-min5ar24-swedencentral"
         apiKey: "${AZURE_GPT51_API_KEY}"
         instanceName: "${AZURE_GPT51_INSTANCE}"
         version: "${AZURE_GPT51_API_VERSION}"
 
         models:
-          gpt-5.1:
+          gpt-5.2:
             deploymentName: "${AZURE_GPT51_DEPLOYMENT}"
 
-      # ---- Gruppe C: hause-min5ar24-swedencentral (gpt-5.1-chat) ----
+      # ---- Gruppe C: hause-min5ar24-swedencentral (gpt-5.2-chat) ----
       - group: "hause-min5ar24-swedencentral-chat"
         apiKey: "${AZURE_GPT51_API_KEY}"
         instanceName: "${AZURE_GPT51_INSTANCE}"
         version: "${AZURE_GPT51_API_VERSION}"
 
         models:
-          gpt-5.1-chat:
+          gpt-5.2-chat:
             deploymentName: "${AZURE_GPT51_CHAT_DEPLOYMENT}"
             
       # ---- Gruppe C: hause-min5ar24-swedencentral (gpt-5.2-codex) ----
