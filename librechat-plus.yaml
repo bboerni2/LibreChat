@@ -54,14 +54,14 @@ endpoints:
           gpt-5.1-chat:
             deploymentName: "${AZURE_GPT51_CHAT_DEPLOYMENT}"
             
-      # ---- Gruppe C: hause-min5ar24-swedencentral (gpt-5.1-codex) ----
+      # ---- Gruppe C: hause-min5ar24-swedencentral (gpt-5.2-codex) ----
       - group: "hause-min5ar24-swedencentral-codex"
         apiKey: "${AZURE_GPT51_API_KEY}"
         instanceName: "${AZURE_GPT51_INSTANCE}"
         version: "${AZURE_GPT51_API_VERSION}"
 
         models:
-          gpt-5.1-codex:
+          gpt-5.2-codex:
             deploymentName: "${AZURE_GPT51_CODEX_DEPLOYMENT}"
 
 modelSpecs:
@@ -89,8 +89,8 @@ modelSpecs:
       label: "GPT-5.2 Codex"
       preset:
         endpoint: "azureOpenAI"
-        model: "gpt-5.1-codex"
-        modelLabel: "GPT-5.1 Codex"
+        model: "gpt-5.2-codex"
+        modelLabel: "GPT-5.2 Codex"
         useResponsesApi: true
 
     # ---- GPT-4o ----
